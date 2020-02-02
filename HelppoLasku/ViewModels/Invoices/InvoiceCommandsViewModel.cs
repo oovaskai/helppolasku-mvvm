@@ -123,7 +123,6 @@ namespace HelppoLasku.ViewModels
             if (Invoice.Date == null)
             {
                 Invoice.InvoiceID = MainMenuViewModel.SelectedCompany.InvoiceID;
-                Invoice.Reference = MainMenuViewModel.SelectedCompany.GetNewReference();
                 Invoice.Interest = MainMenuViewModel.SelectedCompany.DefaultInterest;
                 Invoice.Date = SendDate;
                 Invoice.DueDate = DueDate;

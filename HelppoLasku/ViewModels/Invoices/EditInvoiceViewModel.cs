@@ -102,9 +102,11 @@ namespace HelppoLasku.ViewModels
             if (Model.IsNew || Model.InvoiceID > MainMenuViewModel.SelectedCompany.InvoiceID)
                 MainMenuViewModel.SelectedCompany.InvoiceID++;
 
-            if (!string.IsNullOrEmpty(Model.Reference))
-                MainMenuViewModel.SelectedCompany.ReferenceNumber = Model.Reference.Remove(Model.Reference.Length -1);
-
+            if (string.IsNullOrEmpty(Model.Reference) && Paid != null)
+            {
+                Reference = MainMenuViewModel.SelectedCompany.GetNewReference();
+                MainMenuViewModel.SelectedCompany.ReferenceNumber = Model.Reference.Remove(Model.Reference.Length - 1);
+            }
             base.OnSave();
         }
 

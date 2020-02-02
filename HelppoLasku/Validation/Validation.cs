@@ -76,6 +76,7 @@ namespace HelppoLasku.Validation
                         return null;
                     }
                 case "Price":
+                case "Count":
                     return Double(value.ToString()) ? null : property + " ei ole kelvollinen";
                 case "DefaultInterest":
                     {
@@ -89,7 +90,6 @@ namespace HelppoLasku.Validation
                     }
                     
                 case "DefaultExpire":
-                case "Count":
                     return Int(value.ToString()) ? null : property + " ei ole kelvollinen";
                 default:
                     return null;
