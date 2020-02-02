@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="HelppoLasku.Views.Controls.FileControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    <UserControl.Resources>
+
+        <Style TargetType="Border" x:Key="borderStyle">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="BorderThickness" Value="2"/>
+            <Setter Property="BorderBrush" Value="Transparent"/>
+            <Setter Property="Background" Value="Transparent"/>
+            <Style.Triggers>
+                <Trigger Property="Grid.IsMouseOver" Value="True">
+                    <Setter Property="BorderBrush" Value="AliceBlue"/>
+                </Trigger>
+                <DataTrigger Binding="{Binding ElementName=deleteButton, Path=IsMouseOver}" Value="True">
+                    <Setter Property="Background" Value="LightCoral"/>
+                    <Setter Property="Opacity" Value="0.5"/>
+                </DataTrigger>
+
+            </Style.Triggers>
+        </Style>
+
+        <Style TargetType="MenuItem">
+            <Setter Property="Header" Value="{Binding DisplayName}" />
+            <Setter Property="Command" Value="{Binding Command}" />
+            <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+        </Style>
+
+        <Image Source="/Images/file-white.png" x:Key="openFileImage" Height="11.7" />
+        <Image Source="/Images/folder-color.png" x:Key="openFolderImage" Height="13" />
+        <Image Source="/Images/copy-blue.png" x:Key="copyFileImage" Height="12" />
+        <Image Source="/Images/clear.png" x:Key="deleteFileImage" Height="10" />
+
+    </UserControl.Resources>
+
+    <Border Style="{StaticResource borderStyle}" Margin="1">
+
+        <Grid Focusable="False">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*"/>
+                <ColumnDefinition Width="Auto"/>
+            </Grid.ColumnDefinitions>
+
+            <TextBox Text="{Binding DisplayName, Mode=OneWay}" ToolTip="{Binding FilePath}" IsReadOnly="True" Height="20"  Margin="2">
+                <TextBox.ContextMenu>
+                    <ContextMenu>
+                        <MenuItem DataContext="{Binding OpenFile}" Icon="{StaticResource openFileImage}" />
+                        <MenuItem DataContext="{Binding OpenFolder}" Icon="{StaticResource openFolderImage}"/>
+                        <MenuItem DataContext="{Binding Copy}" Icon="{StaticResource copyFileImage}"/>
+                        <MenuItem DataContext="{Binding Delete}" Icon="{StaticResource deleteFileImage}" />
+                    </ContextMenu>
+                </TextBox.ContextMenu>
+            </TextBox>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="1">
+
+                <local:FileButton DataContext="{Binding OpenFile}" Margin="2,0,1,0"/>
+
+                <local:FolderButton DataContext="{Binding OpenFolder}" Margin="1,0,1,0"/>
+
+                <local:DeleteButton DataContext="{Binding Delete}" x:Name="deleteButton" Margin="1,0,2,0" />
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</UserControl>

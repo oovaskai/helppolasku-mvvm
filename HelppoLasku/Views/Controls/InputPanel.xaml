@@ -1,0 +1,26 @@
+﻿<StackPanel x:Class="HelppoLasku.Views.Controls.InputPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d"
+            
+            x:Name="inputPanel">
+    
+    <StackPanel.Resources>
+        
+        <Style TargetType="Label" x:Key="titleLabel">
+            <Setter Property="FontWeight" Value="SemiBold"/>
+            <Setter Property="FontSize" Value="13"/>
+            <Setter Property="Margin" Value="2,4,0,0"/>
+        </Style>
+        
+    </StackPanel.Resources>
+
+
+    <Label Content="{Binding Path=Header, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:InputPanel}}}" Style="{StaticResource titleLabel}"/>
+
+    <Separator Margin="2"/>
+
+</StackPanel>

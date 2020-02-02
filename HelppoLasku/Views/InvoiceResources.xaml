@@ -1,0 +1,141 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:HelppoLasku.Views"
+                    xmlns:viewmodels="clr-namespace:HelppoLasku.ViewModels">
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="InfoTextBlockSyle">
+        <Setter Property="Margin" Value="2,5,5,-3" />
+    </Style>
+
+    <Style TargetType="{x:Type TextBlock}" x:Key="StatusTextBlockStyle" >
+        <Setter Property="Text" Value="{Binding Status}" />
+        <Style.Triggers>
+            
+            <DataTrigger Binding="{Binding IsLate}" Value="True">
+                <Setter Property="Foreground" Value="Red" />
+            </DataTrigger>
+
+            <DataTrigger Binding="{Binding Paid}" Value="True">
+                <Setter Property="Foreground" Value="Green" />
+            </DataTrigger>
+
+            <MultiDataTrigger>
+                <MultiDataTrigger.Conditions>
+                    <Condition Binding="{Binding IsLate}" Value="False" />
+                    <Condition Binding="{Binding Paid}" Value="False" />
+                </MultiDataTrigger.Conditions>
+                <Setter Property="Foreground" Value="Orange" />
+            </MultiDataTrigger>
+            
+        </Style.Triggers>
+    </Style>
+
+    <DataTemplate DataType="{x:Type viewmodels:InvoiceTitleViewModel}">
+        <local:InvoiceTitleView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:InvoiceItemViewModel}">
+        <Grid Margin="0,1,0,1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="{Binding ElementName=priceColumn, Path=ActualWidth}" />
+                <ColumnDefinition Width="{Binding ElementName=countColumn, Path=ActualWidth}" />
+                <ColumnDefinition Width="{Binding ElementName=unitColumn, Path=ActualWidth}" />
+                <ColumnDefinition Width="{Binding ElementName=taxColumn, Path=ActualWidth}" />
+                <ColumnDefinition Width="{Binding ElementName=totalColumn, Path=ActualWidth}" />
+            </Grid.ColumnDefinitions>
+
+            <TextBlock Grid.Column="0" Text="{Binding Content}" />
+            <TextBlock Grid.Column="1" Text="{Binding TaxlessPrice, ConverterCulture='fi-FI', StringFormat={}{0:C}}" TextAlignment="Right"/>
+            <TextBlock Grid.Column="2" Text="{Binding Count}" TextAlignment="Center"/>
+            <TextBlock Grid.Column="3" Text="{Binding Unit}" TextAlignment="Center"/>
+            <TextBlock Grid.Column="4" Text="{Binding Tax, StringFormat={}{00} %}" TextAlignment="Right"/>
+            <TextBlock Grid.Column="5" Text="{Binding Total, ConverterCulture='fi-FI', StringFormat={}{0:C}}" TextAlignment="Right"/>
+        </Grid>
+    </DataTemplate>
+
+
+    <DataTemplate DataType="{x:Type viewmodels:InvoiceCommandsViewModel}" >
+        <local:InvoiceCommandsView />
+    </DataTemplate>
+
+    <DataTemplate x:Key="InvoiceTotalBarTemplate">
+        <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
+
+            <TextBlock Text="Veroton:" Style="{StaticResource InfoTextBlockSyle}" />
+            <TextBlock Text="{Binding Taxless, ConverterCulture='fi-FI', StringFormat={}{0:C}}" Style="{StaticResource InfoTextBlockSyle}" />
+
+            <Separator Margin="5,3,5,-6" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+
+            <TextBlock Text="ALV:" Style="{StaticResource InfoTextBlockSyle}" />
+            <TextBlock Text="{Binding Taxed, ConverterCulture='fi-FI', StringFormat={}{0:C}}" Style="{StaticResource InfoTextBlockSyle}" />
+
+            <Separator Margin="5,3,5,-6" Style="{StaticResource {x:Static ToolBar.SeparatorStyleKey}}"/>
+
+            <TextBlock Text="Yhteensä:" Style="{StaticResource InfoTextBlockSyle}" />
+            <TextBlock Text="{Binding Total, ConverterCulture='fi-FI', StringFormat={}{0:C}}" Style="{StaticResource InfoTextBlockSyle}" />
+
+        </StackPanel>
+    </DataTemplate>
+
+    <Style TargetType="Border" x:Key="TitleBorderStyle">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="Transparent"/>
+        <Setter Property="Background" Value="Transparent"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightGray" Opacity="0.2" />
+                    </Setter.Value>
+                </Setter>
+                <Setter Property="BorderBrush"  Value="Gainsboro" />
+            </Trigger>
+
+            <DataTrigger Binding="{Binding ElementName=deleteButton, Path=IsMouseOver}" Value="True">
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightCoral" Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="TextBox" x:Key="ItemTextBoxStyle">
+        <Setter Property="Margin" Value="2,1,2,1"/>
+        <Setter Property="Height" Value="22"/>
+        <Setter Property="VerticalContentAlignment" Value="Center"/>
+    </Style>
+
+    <Style TargetType="TextBlock" x:Key="AddTextBlockStyle">
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="Foreground" Value="Transparent" />
+        <Setter Property="Padding" Value="5,2,0,0" />
+        <Style.Triggers>
+            <DataTrigger Binding="{Binding ElementName=addButton, Path=IsMouseOver}" Value="True">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background">
+                    <Setter.Value>
+                        <SolidColorBrush Color="LightGreen" Opacity="0.5" />
+                    </Setter.Value>
+                </Setter>
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="HeaderedContentControl" x:Key="ItemContentControlStyle">
+        <Setter Property="Margin" Value="2,0,2,0" />
+        <Setter Property="Focusable" Value="False" />
+    </Style>
+
+    <DataTemplate DataType="{x:Type viewmodels:EditInvoiceTitleViewModel}">
+        <local:EditInvoiceTitleView />
+    </DataTemplate>
+
+    <DataTemplate DataType="{x:Type viewmodels:EditInvoiceItemViewModel}">
+        <local:EditInvoiceItemView />
+    </DataTemplate>
+
+</ResourceDictionary>

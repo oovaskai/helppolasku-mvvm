@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace HelppoLasku
+namespace HelppoLasku.Views.Controls
 {
     /// <summary>
-    /// Interaction logic for MainWindow.xaml
+    /// Interaction logic for DeleteButton.xaml
     /// </summary>
-    public partial class MainWindow : Window
+    public partial class DeleteButton : Button
     {
-        public MainWindow()
+        public DeleteButton()
         {
             InitializeComponent();
         }

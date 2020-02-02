@@ -1,7 +1,27 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
-<SettingsFile xmlns="uri:settings" CurrentProfile="(Default)">
-  <Profiles>
-    <Profile Name="(Default)" />
-  </Profiles>
-  <Settings />
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="HelppoLasku.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="TaxRates" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%24%14%10%0</Value>
+    </Setting>
+    <Setting Name="SelectedCompany" Type="System.String" Scope="User">
+      <Value Profile="(Default)">%NotSet%</Value>
+    </Setting>
+    <Setting Name="DefaultTax" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">24</Value>
+    </Setting>
+    <Setting Name="DefaultExpire" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="MaxInterest" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">11.5</Value>
+    </Setting>
+    <Setting Name="MinReferenceLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="MaxReferenceLength" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">19</Value>
+    </Setting>
+  </Settings>
 </SettingsFile>

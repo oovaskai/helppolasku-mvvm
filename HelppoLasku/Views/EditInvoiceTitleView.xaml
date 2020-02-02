@@ -1,0 +1,44 @@
+﻿<UserControl x:Class="HelppoLasku.Views.EditInvoiceTitleView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views"
+             xmlns:controls="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <ResourceDictionary Source="InvoiceResources.xaml" />
+    </UserControl.Resources>
+    
+    
+    <Border Style="{StaticResource TitleBorderStyle}">
+        <Grid>
+            <StackPanel>
+
+                <DockPanel LastChildFill="True">
+
+                    <controls:DeleteButton x:Name="deleteButton" Margin="2,0,2,0" DataContext="{Binding DeleteTitle}" DockPanel.Dock="Right"/>
+
+                    <TextBox Text="{Binding Header}" ToolTip="Otsikko" Style="{StaticResource ItemTextBoxStyle}"/>
+
+                </DockPanel>
+
+                <ItemsControl ItemsSource="{Binding Items}" Margin="7,0,20,0" Focusable="False"/>
+
+                <DockPanel Margin="9,0,5,0" LastChildFill="True">
+
+                    <controls:AddButton x:Name="addButton" DataContext="{Binding NewItem}" DockPanel.Dock="Left"/>
+
+                    <TextBlock Text="Uusi nimike" Style="{StaticResource AddTextBlockStyle}" Height="22"/>
+
+                </DockPanel>
+
+                <Separator Margin="2"/>
+
+            </StackPanel>
+
+        </Grid>
+    </Border>
+</UserControl>

@@ -1,0 +1,29 @@
+﻿<Window x:Class="HelppoLasku.Views.Controls.Dialog"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
+        xmlns:views="clr-namespace:HelppoLasku.Views"
+        xmlns:viewmodels="clr-namespace:HelppoLasku.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding DisplayName}" Height="450" Width="800"
+        WindowStyle="SingleBorderWindow" Closing="Window_Closing" Background="White">
+
+    <Window.Resources>
+
+        <DataTemplate DataType="{x:Type viewmodels:EditProductViewModel}">
+            <views:EditProductView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:EditCustomerViewModel}">
+            <views:EditCustomerView />
+        </DataTemplate>
+
+    </Window.Resources>
+
+    <Border Margin="5" Background="WhiteSmoke" BorderBrush="LightGray" BorderThickness="1">
+        <ContentControl Content="{Binding}" Margin="5" Focusable="False"/>
+    </Border>
+    
+</Window>

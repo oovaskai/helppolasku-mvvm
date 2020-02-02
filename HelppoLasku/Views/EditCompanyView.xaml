@@ -1,0 +1,130 @@
+﻿<UserControl x:Class="HelppoLasku.Views.EditCompanyView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views"
+             xmlns:controls="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <UserControl.Resources>
+
+        <Style TargetType="TextBox">
+            <Setter Property="Margin" Value="2" />
+        </Style>
+        
+        <Style TargetType="TextBox" x:Key="nameTextBoxStyle">
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Stretch"/>
+            <Setter Property="VerticalAlignment" Value="Top"/>
+            <Setter Property="Height" Value="30"/>
+            <Setter Property="FontSize" Value="16"/>
+            <Setter Property="Text" Value="{Binding Name, UpdateSourceTrigger=PropertyChanged, ValidatesOnDataErrors=True}"/>
+        </Style>
+
+        <Style TargetType="GridSplitter">
+            <Setter Property="Grid.Row" Value="1"/>
+            <Setter Property="Grid.RowSpan" Value="2"/>
+            <Setter Property="Width" Value="3"/>
+            <Setter Property="Margin" Value="2"/>
+            <Setter Property="VerticalContentAlignment" Value="Center"/>
+            <Setter Property="HorizontalAlignment" Value="Center" />
+        </Style>
+
+    </UserControl.Resources>
+
+    <Grid Margin="2">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <DockPanel Grid.ColumnSpan="5" IsEnabled="{Binding IsEnabled}" >
+            <Label Content="Nimi:" FontSize="16" FontWeight="SemiBold"/>
+            <TextBox x:Name="nameTextBox" Style="{StaticResource nameTextBoxStyle}"/>
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Grid.Row="1" IsEnabled="{Binding IsEnabled}">
+
+            <controls:InputPanel Header="Yleiset" DockPanel.Dock="Top">
+                <controls:TextInputControl Title="Y-tunnus:" Text="{Binding CompanyID, ValidatesOnDataErrors=True}" ToolTip="Y-Tunnus"/>
+                <controls:TextInputControl Title="Puhelin:" Text="{Binding Phone}"/>
+                <controls:TextInputControl Title="Sähköposti:" Text="{Binding Email, ValidatesOnDataErrors=True}"/>
+                <controls:TextInputControl Title="Kotisivu:" Text="{Binding WebPage}"/>
+            </controls:InputPanel>
+
+            <controls:ImageFileControl DataContext="{Binding LogoManager}"/>
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Grid.Column="1" Grid.Row="1" IsEnabled="{Binding IsEnabled}">
+
+            <controls:InputPanel Header="Sijainti" DockPanel.Dock="Top">
+                <controls:TextInputControl Title="Osoite:" Text="{Binding Address, ValidatesOnDataErrors=True}"/>
+                <controls:TextInputControl Title="Postinumero:" Text="{Binding PostalCode, ValidatesOnDataErrors=True}"/>
+                <controls:TextInputControl Title="Kaupunki:" Text="{Binding City, ValidatesOnDataErrors=True}"/>
+                <controls:TextInputControl Title="Maa:" Text="{Binding Country}"/>
+            </controls:InputPanel>
+
+            <controls:TextLongInputControl Header="Lisätietoa"/>
+
+        </DockPanel>
+
+        <DockPanel LastChildFill="True" Grid.Column="2" Grid.Row="1">
+
+            <controls:InputPanel Header="Laskutustiedot" DockPanel.Dock="Top">
+                <controls:TextInputControl Title="BIC:" Text="{Binding BIC, ValidatesOnDataErrors=True}" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextInputControl Title="IBAN:" Text="{Binding IBAN, ValidatesOnDataErrors=True}" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Maksuehto:" Text="{Binding DefaultExpire, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Viivästyskorko:" Text="{Binding DefaultInterest, ValidatesOnDataErrors=True}" Unit="%" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Viitenumero:" Text="{Binding ReferenceNumber, ValidatesOnDataErrors=True}" Unit="{Binding ReferenceCheckNumber}" IsEnabled="{Binding IsEnabled}"/>
+
+                <Grid IsEnabled="{Binding IsEnabled}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Titles" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Units" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Oletus ALV:" />
+                    <ComboBox Grid.Column="1" ItemsSource="{Binding TaxRates}" SelectedItem="{Binding DefaultTax}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="2"/>
+                    <Label Content="%" Grid.Column="2" />
+
+                </Grid>
+
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Titles"/>
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Units" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Laskunumero:" />
+                    <controls:InputTextBox Text="{Binding InvoiceID, ValidatesOnDataErrors=True}" OnFocus="SelectAll" IsReadOnly="{Binding ReadOnlyID, Mode=OneWay}" TextAlignment="Right" Grid.Column="1" />
+
+                    <controls:EditButton DataContext="{Binding EditID}" Grid.Column="2" HorizontalAlignment="Left"/>
+
+                    <DockPanel Grid.Column="2" HorizontalAlignment="Left">
+                        <controls:OkButton DataContext="{Binding SaveID}" IsDefault="True" />
+                        <controls:DeleteButton DataContext="{Binding CancelID}" />
+                    </DockPanel>
+                    
+
+                </Grid>
+            </controls:InputPanel>
+
+            <DockPanel LastChildFill="True" VerticalAlignment="Bottom" >
+                <controls:OkCancelButtonPanel  DataContext="{Binding Commands}" IsOkDefault="True" Focusable="True" DockPanel.Dock="Right"/>
+                <TextBlock Text="{Binding Error}" Foreground="Red" Margin="2,0,0,0"/>
+            </DockPanel>
+
+        </DockPanel>
+
+    </Grid>
+</UserControl>

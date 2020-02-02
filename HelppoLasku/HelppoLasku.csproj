@@ -37,6 +37,8 @@
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -55,7 +57,345 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="MainWindow.xaml">
+    <Compile Include="DataAccess\DataRepository.cs" />
+    <Compile Include="Validation\DataValidator.cs" />
+    <Compile Include="DataAccess\IDataHandler.cs" />
+    <Compile Include="DataAccess\Resources.cs" />
+    <Compile Include="DataAccess\DataModel.cs" />
+    <Compile Include="Validation\CompanyValidator.cs" />
+    <Compile Include="Validation\CustomerValidator.cs" />
+    <Compile Include="Validation\InvoiceItemValidator.cs" />
+    <Compile Include="Validation\InvoiceValidator.cs" />
+    <Compile Include="Validation\ProductGroupValidator.cs" />
+    <Compile Include="Validation\ProductValidator.cs" />
+    <Compile Include="Validation\Validation.cs" />
+    <Compile Include="Settings.cs" />
+    <Compile Include="Test\IDGenerator.cs" />
+    <Compile Include="Test\TestData.cs" />
+    <Compile Include="Test\TestHandler.cs" />
+    <Compile Include="ViewModels\Base\CollectionCommandsViewModel.cs" />
+    <Compile Include="ViewModels\Base\CollectionViewModel.cs" />
+    <Compile Include="ViewModels\Base\ContactViewModel.cs" />
+    <Compile Include="ViewModels\Base\EditCommandsViewModel.cs" />
+    <Compile Include="ViewModels\Base\FileManagerViewModel.cs" />
+    <Compile Include="ViewModels\Base\FileViewModel.cs" />
+    <Compile Include="ViewModels\Base\ImageManagerViewModel.cs" />
+    <Compile Include="ViewModels\Companies\CompanyMenuItemViewModel.cs" />
+    <Compile Include="ViewModels\Companies\CompanyMenuViewModel.cs" />
+    <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
+    <Compile Include="ViewModels\Customers\CustomerFilterViewModel.cs" />
+    <Compile Include="ViewModels\Customers\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Customers\EditCustomerViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\AllInvoicesViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\EditInvoiceItemViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\EditInvoiceTitleViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\EditInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceCommandsViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceFilterViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceItemViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceListViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceTitleViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\InvoiceViewModel.cs" />
+    <Compile Include="ViewModels\Products\AllProductsViewModel.cs" />
+    <Compile Include="ViewModels\Base\CommandViewModel.cs" />
+    <Compile Include="ViewModels\Base\CustomCommand.cs" />
+    <Compile Include="ViewModels\Base\DataViewModel.cs" />
+    <Compile Include="ViewModels\Base\FilterViewModel.cs" />
+    <Compile Include="ViewModels\Base\ListViewModel.cs" />
+    <Compile Include="ViewModels\Base\ViewModelBase.cs" />
+    <Compile Include="ViewModels\MainMenuViewModel.cs" />
+    <Compile Include="ViewModels\MainWindowViewModel.cs" />
+    <Compile Include="ViewModels\Products\EditProductViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductFilterViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductGroupListViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductGroupViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\Products\ProductViewModel.cs" />
+    <Compile Include="ViewModels\WorkspaceControlViewModel.cs" />
+    <Compile Include="ViewModels\WorkspaceViewModel.cs" />
+    <Compile Include="Views\Controls\AddButton.xaml.cs">
+      <DependentUpon>AddButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\CheckBoxInputControl.xaml.cs">
+      <DependentUpon>CheckBoxInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ClearButton.xaml.cs">
+      <DependentUpon>ClearButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\CopyButton.xaml.cs">
+      <DependentUpon>CopyButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\DeleteButton.xaml.cs">
+      <DependentUpon>DeleteButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\Dialog.xaml.cs">
+      <DependentUpon>Dialog.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\EditButton.xaml.cs">
+      <DependentUpon>EditButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\FileButton.xaml.cs">
+      <DependentUpon>FileButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\FileControl.xaml.cs">
+      <DependentUpon>FileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\FolderButton.xaml.cs">
+      <DependentUpon>FolderButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\HeaderedSplittedView.xaml.cs">
+      <DependentUpon>HeaderedSplittedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ImageFileControl.xaml.cs">
+      <DependentUpon>ImageFileControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\InputPanel.xaml.cs">
+      <DependentUpon>InputPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\InputTextBox.xaml.cs">
+      <DependentUpon>InputTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ListButtonPanel1.xaml.cs">
+      <DependentUpon>ListButtonPanel1.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\ListButtonPanel2.xaml.cs">
+      <DependentUpon>ListButtonPanel2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\OkButton.xaml.cs">
+      <DependentUpon>OkButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\OkCancelButtonPanel.xaml.cs">
+      <DependentUpon>OkCancelButtonPanel.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SearchTextBox.xaml.cs">
+      <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SortableListView.xaml.cs">
+      <DependentUpon>SortableListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TextInputControl.xaml.cs">
+      <DependentUpon>TextInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TextLongInputControl.xaml.cs">
+      <DependentUpon>TextLongInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\TextUnitInputControl.xaml.cs">
+      <DependentUpon>TextUnitInputControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SymbolButton.xaml.cs">
+      <DependentUpon>SymbolButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerFilterView.xaml.cs">
+      <DependentUpon>CustomerFilterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\CustomerListView.xaml.cs">
+      <DependentUpon>CustomerListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditCompanyView.xaml.cs">
+      <DependentUpon>EditCompanyView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditCustomerView.xaml.cs">
+      <DependentUpon>EditCustomerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInvoiceItemView.xaml.cs">
+      <DependentUpon>EditInvoiceItemView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInvoiceTitleView.xaml.cs">
+      <DependentUpon>EditInvoiceTitleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditInvoiceView.xaml.cs">
+      <DependentUpon>EditInvoiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EditProductView.xaml.cs">
+      <DependentUpon>EditProductView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceCommandsView.xaml.cs">
+      <DependentUpon>InvoiceCommandsView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceFilterView.xaml.cs">
+      <DependentUpon>InvoiceFilterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceListView.xaml.cs">
+      <DependentUpon>InvoiceListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceTitleView.xaml.cs">
+      <DependentUpon>InvoiceTitleView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\InvoiceView.xaml.cs">
+      <DependentUpon>InvoiceView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\MainMenuView.xaml.cs">
+      <DependentUpon>MainMenuView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductFilterView.xaml.cs">
+      <DependentUpon>ProductFilterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductGroupListView.xaml.cs">
+      <DependentUpon>ProductGroupListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ProductListView.xaml.cs">
+      <DependentUpon>ProductListView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SplittedView.xaml.cs">
+      <DependentUpon>SplittedView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\WorkspaceControlView.xaml.cs">
+      <DependentUpon>WorkspaceControlView.xaml</DependentUpon>
+    </Compile>
+    <Page Include="Views\Controls\AddButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\CheckBoxInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ClearButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\CopyButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\DeleteButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\Dialog.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\EditButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FileButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\FolderButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\HeaderedSplittedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ImageFileControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\InputPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\InputTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ListButtonPanel1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\ListButtonPanel2.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\OkButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\OkCancelButtonPanel.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SortableListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\TextInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\TextLongInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\TextUnitInputControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SymbolButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerFilterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\CustomerListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditCompanyView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditCustomerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditInvoiceItemView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditInvoiceTitleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditInvoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EditProductView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceCommandsView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceFilterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceTitleView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -63,12 +403,48 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="MainWindow.xaml.cs">
+    <Compile Include="Views\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="Views\MainMenuView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductFilterView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductGroupListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ProductListView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SplittedView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkspaceControlView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\WorkspaceResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Models\Company.cs" />
+    <Compile Include="Models\Contact.cs" />
+    <Compile Include="Models\Customer.cs" />
+    <Compile Include="Models\InvoiceItem.cs" />
+    <Compile Include="Models\Product.cs" />
+    <Compile Include="Models\ProductGroup.cs" />
+    <Compile Include="Models\Invoice.cs" />
+    <Compile Include="Models\InvoiceTitle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -83,7 +459,7 @@
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
     <EmbeddedResource Include="Properties\Resources.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
+      <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <None Include="Properties\Settings.settings">
@@ -93,6 +469,27 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\plus_green.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\clear.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\pencil-edit-button.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\check-mark.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\copy-blue.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\file-white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\folder-color.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

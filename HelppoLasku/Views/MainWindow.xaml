@@ -1,0 +1,34 @@
+﻿<Window x:Class="HelppoLasku.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:HelppoLasku.Views"
+        xmlns:viewmodels="clr-namespace:HelppoLasku.ViewModels"
+        mc:Ignorable="d"
+        Title="{Binding DisplayName}" Height="720" Width="1200" Background="Gainsboro">
+    
+    <Window.Resources>
+        
+        <DataTemplate DataType="{x:Type viewmodels:MainMenuViewModel}">
+            <local:MainMenuView />
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type viewmodels:WorkspaceControlViewModel}">
+            <local:WorkspaceControlView />
+        </DataTemplate>
+        
+    </Window.Resources>
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+        <ContentControl Content="{Binding MainMenu}" Focusable="False"/>
+
+        <ContentControl Content="{Binding WorkspaceControl}" Grid.Row="1" Margin="2,0,2,2" Focusable="False" />
+
+    </Grid>
+</Window>

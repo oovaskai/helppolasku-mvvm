@@ -1,0 +1,20 @@
+﻿<UserControl x:Class="HelppoLasku.Views.Controls.OkCancelButtonPanel"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <StackPanel Orientation="Horizontal">
+
+        <local:OkButton Margin="2,0,1,0"
+            IsDefault="{Binding Path=IsOkDefault, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}" 
+            Focusable="{Binding Path=Focusable, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}" />
+
+        <local:DeleteButton DataContext="{Binding Cancel}" Command="{Binding Command}" ToolTip="{Binding ToolTip}" Margin="1,0,2,0"
+                            Focusable="{Binding Path=Focusable, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}"/>
+    </StackPanel>
+    
+</UserControl>

@@ -1,0 +1,72 @@
+﻿<UserControl x:Class="HelppoLasku.Views.ProductListView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views"
+             xmlns:controls="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="450" d:DesignWidth="800">
+    
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <local:ProductFilterView DataContext="{Binding Filter}" Margin="1"/>
+
+        <controls:SortableListView Grid.Row="1" Margin="1" ItemsSource="{Binding Items}" SelectedItem="{Binding SelectedItem}" >
+        <ListView.View>
+                <GridView>
+                    
+                    <GridViewColumn Header="Tuoteryhmä" Width="120" DisplayMemberBinding="{Binding Group.Name}" />
+
+                    <GridViewColumn Header="Tuotekoodi" Width="100" DisplayMemberBinding="{Binding ProductID}" />
+
+                    <GridViewColumn Header="Nimike" Width="300" DisplayMemberBinding="{Binding Name}"  />
+
+                    <GridViewColumn Header="Hinta" Width="70" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding TaxlessPrice, ConverterCulture='fi-FI', StringFormat={}{0:C}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+
+                    <GridViewColumn Header="Yksikkö" Width="70" DisplayMemberBinding="{Binding Unit}" />
+
+                    <GridViewColumn Header="ALV" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding Tax, StringFormat={}{0:0.00} %}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                    <GridViewColumn Header="Yhteensä" Width="70">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <TextBlock TextAlignment="Right" Text="{Binding TotalPrice, ConverterCulture='fi-FI', StringFormat={}{0:C}}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                    
+                </GridView>
+            </ListView.View>
+        </controls:SortableListView>
+
+        <GridSplitter Grid.Row="2" Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="LightGray" Margin="0,10,0,2" Focusable="False"/>
+
+        <DockPanel LastChildFill="True" VerticalAlignment="Stretch" Grid.Row="3">
+
+            <Label Content="Lisätiedot" DockPanel.Dock="Top"/>
+
+            <TextBox Text="{Binding SelectedItem.Info, Mode=OneWay}"  TextWrapping="Wrap" IsReadOnly="True" DockPanel.Dock="Top" VerticalAlignment="Stretch" VerticalScrollBarVisibility="Visible"/>
+
+        </DockPanel>
+
+    </Grid>
+</UserControl>

@@ -1,0 +1,68 @@
+﻿<UserControl x:Class="HelppoLasku.Views.MainMenuView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="800" Background="Gainsboro">
+    
+    <UserControl.Resources>
+        
+        <Style TargetType="MenuItem" x:Key="companyMenuItem">
+            <Setter Property="IsCheckable" Value="True"/>
+            <Setter Property="Header" Value="{Binding Name, Mode=OneWay}"/>
+            <Setter Property="IsChecked" Value="{Binding IsSelected, Mode=OneWay}"/>
+            <Setter Property="Command" Value="{Binding Select.Command}"/>
+        </Style>
+
+        <Style TargetType="MenuItem" x:Key="CommandMenuItemStyle">
+            <Setter Property="Header" Value="{Binding DisplayName}" />
+            <Setter Property="Command" Value="{Binding Command}" />
+        </Style>
+        
+    </UserControl.Resources>
+
+    <Grid Background="Gainsboro" Margin="0,2,0,0">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+
+        <Menu HorizontalAlignment="Stretch" Height="22" VerticalAlignment="Top" Background="Transparent">
+            
+            <MenuItem Header="_Tiedosto">
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Close}"/>
+            </MenuItem>
+
+            <MenuItem Header="_Laskut" IsEnabled="{Binding CompanySelected}">
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Invoices}" />
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding NewInvoice}" />
+            </MenuItem>
+
+            <MenuItem Header="_Asiakkaat" IsEnabled="{Binding CompanySelected}">
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Customers}" />
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding NewCustomer}" />
+            </MenuItem>
+
+            <MenuItem Header="T_uotteet" IsEnabled="{Binding CompanySelected}">
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Products}" />
+                <MenuItem Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding NewProduct}" />
+            </MenuItem>
+            
+        </Menu>
+
+        <Menu Grid.Column="1" Height="22" VerticalAlignment="Top" DataContext="{Binding CompanyMenu}" Background="Transparent">
+            
+            <MenuItem Header="{Binding DisplayName}" Margin="0,0,5,0">
+                
+                <MenuItem Header="Muokkaa tietoja" Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Commands.Edit}"/>
+                
+                <MenuItem Header="Vaihda yritystä" IsEnabled="{Binding IsEnabled}" ItemsSource="{Binding Items}" ItemContainerStyle="{StaticResource companyMenuItem}"/>
+
+                <MenuItem Header="Uusi yritys" Style="{StaticResource CommandMenuItemStyle}" DataContext="{Binding Commands.New}"/>
+                
+            </MenuItem>
+        </Menu>
+    </Grid>
+</UserControl>

@@ -1,0 +1,41 @@
+﻿<UserControl x:Class="HelppoLasku.Views.Controls.SearchTextBox"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
+             mc:Ignorable="d" 
+             d:DesignHeight="50" d:DesignWidth="300"
+             Name="searchTextBox"
+             Loaded="SearchTextBox_Loaded">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+        </Grid.ColumnDefinitions>
+
+        <local:InputTextBox x:Name="filterTextBox" MaxLines="1"
+                            TextChanged="FilterTextBox_TextChanged"
+                            Text="{Binding ElementName=searchTextBox, Path=Text, UpdateSourceTrigger=PropertyChanged}"
+                            IsDefault="{Binding ElementName=searchTextBox, Path=IsDefault}"
+                            OnFocus="SelectAll" PreviewKeyDown="FilterTextBox_PreviewKeyDown" 
+                            AcceptsReturn="False"/>
+        
+        
+        <Popup Name="popUp" Width="{Binding ElementName=filterTextBox, Path=ActualWidth}" Placement="Bottom"
+               PopupAnimation="Scroll" AllowsTransparency="True" StaysOpen="False" Focusable="True">
+
+            <Border BorderBrush="Gainsboro" BorderThickness="1" Background="WhiteSmoke" Margin="1">
+
+                <ListBox Name="itemListBox" SelectionMode="Single"
+                         ItemsSource="{Binding ElementName=searchTextBox, Path=ItemsSource, Mode=OneWay}"
+                         DisplayMemberPath="{Binding ElementName=searchTextBox, Path=DisplayItemPath}"
+                         SelectionChanged="ItemListBox_SelectionChanged" Focusable="True" PreviewKeyDown="ItemListBox_PreviewKeyDown"
+                         MouseDoubleClick="ItemListBox_DoubleClick"/>
+
+            </Border>
+        </Popup>
+
+        <local:SymbolButton x:Name="popUpButton" Grid.Column="1" Focusable="False" Content="6" Click="PopUpButton_Click" ToolTip="Selaa tuotteita" Command="{x:Null}"/>
+    </Grid>
+</UserControl>
