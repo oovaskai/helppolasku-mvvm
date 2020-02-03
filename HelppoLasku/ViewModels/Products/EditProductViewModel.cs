@@ -18,7 +18,7 @@ namespace HelppoLasku.ViewModels
             if (Model.IsNew)
             {
                 DisplayName = "Uusi tuote";
-                Tax = MainMenuViewModel.SelectedCompany.DefaultTax.ToString();
+                Tax = MainMenuViewModel.SelectedCompany.Tax.ToString();
             }
             else  
             {

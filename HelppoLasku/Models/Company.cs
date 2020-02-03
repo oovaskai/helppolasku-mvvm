@@ -18,15 +18,25 @@ namespace HelppoLasku.Models
 
         public string IBAN { get; set; }
 
-        public int DefaultExpire { get; set; } // HETI jos myöhässä || > 7 yrityksille, >= 14
+        public int InvoiceID { get; set; }
 
-        public double DefaultInterest { get; set; } // max 11,5 %  yrityksille, aina kuluttajille
+        public string ReferenceBase { get; set; }
 
-        public string ReferenceNumber { get; set; } // min 4 merkkiä, max 19 merkkiä + tarkiste && generoi asnro + laskunro || juokseva
+        public string Reference => ReferenceBase + ReferenceCheck(ReferenceBase);
 
-        public int InvoiceID { get; set; } // juokseva
+        public int CompanyExpire { get; set; }
 
-        public double DefaultTax { get; set; }
+        public double CompanyInterest { get; set; }
+
+        public int CompanyAnnotation { get; set; }
+
+        public int PersonExpire { get; set; }
+
+        public double PersonInterest { get; set; }
+
+        public int PersonAnnotation { get; set; }
+        
+        public double Tax { get; set; }
 
         internal override string[] CopyProperties
         {
@@ -37,11 +47,15 @@ namespace HelppoLasku.Models
                     "Logo",
                     "BIC",
                     "IBAN",
-                    "DefaultExpire",
-                    "DefaultInterest",
-                    "ReferenceNumber",
+                    "CompanyExpire",
+                    "CompanyInterest",
+                    "CompanyAnnotation",
+                    "PersonExpire",
+                    "PersonInterest",
+                    "PersonAnnotation",
+                    "ReferenceBase",
                     "InvoiceID",
-                    "DefaultTax"
+                    "Tax",
                 }).ToArray();
 
                 return props;
@@ -50,13 +64,13 @@ namespace HelppoLasku.Models
 
         #region Methods
 
-        public string GetNewReference()
+        public void NewInvoice()
         {
             int firstNonZero = -1;
 
-            for (int i = 0; i < ReferenceNumber.Length; i++)
+            for (int i = 0; i < ReferenceBase.Length; i++)
             {
-                if (ReferenceNumber[i] != '0')
+                if (ReferenceBase[i] != '0')
                     if (firstNonZero == -1)
                         firstNonZero = i;
             }
@@ -65,7 +79,7 @@ namespace HelppoLasku.Models
 
             if (firstNonZero > -1)
             {
-                newRef = ReferenceNumber.Substring(firstNonZero);
+                newRef = ReferenceBase.Substring(firstNonZero);
 
                 if (newRef.Length > 0)
                 {
@@ -73,18 +87,17 @@ namespace HelppoLasku.Models
                     intRef++;
                     newRef = intRef.ToString();
                 }
-                else
-                    newRef = "1";
             }
 
-            if (newRef.Length > ReferenceNumber.Length)
-                return newRef + ReferenceCheck(newRef).ToString();
+            if (newRef.Length > ReferenceBase.Length)
+                ReferenceBase = newRef;
             
             if (newRef.Length < 1)
                 newRef = "1";
 
-            string newReference = ReferenceNumber.Remove(ReferenceNumber.Length - newRef.Length) + newRef;
-            return newReference + ReferenceCheck(newReference).ToString();
+            ReferenceBase = ReferenceBase.Remove(ReferenceBase.Length - newRef.Length) + newRef;
+            InvoiceID++;
+            Save();
         }
 
         public int ReferenceCheck(string reference)

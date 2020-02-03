@@ -13,34 +13,59 @@
     </UserControl.Resources>
 
     <Grid >
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto" />
-            <ColumnDefinition Width="*" />
-            <ColumnDefinition Width="Auto" />
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="25" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="Auto" />
             <RowDefinition Height="*" />
             <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
 
-        <Label Content="Asiakas:" />
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="25" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="Auto" />
+                <ColumnDefinition Width="300" />
+                <ColumnDefinition Width="Auto" />
+            </Grid.ColumnDefinitions>
 
-        <ComboBox Grid.Column="1" ItemsSource="{Binding CustomerList.Items}" SelectedItem="{Binding CustomerList.SelectedItem}" DisplayMemberPath="FullName" IsEnabled="{Binding IsEnabled}" Margin="2"/>
+            <Label Content="Asiakas:" />
+            <ComboBox Grid.Column="1" ItemsSource="{Binding CustomerList.Items}" SelectedItem="{Binding CustomerList.SelectedItem}" DisplayMemberPath="FullName" IsEnabled="{Binding IsEnabled}" Margin="2"/>
 
-        <controls:OkCancelButtonPanel Grid.Column="2" DataContext="{Binding Commands}"/>
+            <local:InvoiceStatusControl DataContext="{Binding}" Grid.Column="2" Grid.ColumnSpan="2" />
 
-        <Label Grid.Row="1" Content="Tila:" />
+            <!--<controls:OkCancelButtonPanel Grid.Column="4" DataContext="{Binding Commands}" />-->
 
-        <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding StatusCommands}" Focusable="False" HorizontalAlignment="Left"/>
+            <StackPanel Orientation="Horizontal" Grid.Column="4">
 
-        <TextBlock Grid.Column="1" Grid.Row="1" Grid.ColumnSpan="2" Text="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center"/>
+                <controls:OkButton DataContext="{Binding Commands.Save}" Margin="2,0,1,0" IsDefault="False" />
 
-        <Separator Grid.ColumnSpan="3" Grid.Row="2" Margin="3" />
+                <controls:SendButton  Margin="2,0,1,0" />
 
-        <Border Grid.ColumnSpan="3" Grid.Row="3" BorderThickness="0" Margin="2" Focusable="False">
+                <controls:PayButton Margin="2,0,1,0" />
+                
+                <controls:DeleteButton DataContext="{Binding Commands.Cancel}" Command="{Binding Command}" ToolTip="{Binding ToolTip}" Margin="1,0,2,0" />
+                
+            </StackPanel>
+
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="4" Grid.Row="1" Text="{Binding Error}" Foreground="Red" HorizontalAlignment="Right" VerticalAlignment="Center" Margin="0,0,10,0"/>
+
+            <Label Grid.Row="1" Content="Laskunumero:" />
+            <Label Grid.Row="1" Grid.Column="1" Content="{Binding InvoiceID}" />
+
+            <Label Grid.Row="2" Content="Viitenumero:" HorizontalAlignment="Right" Margin="0,0,4,0"/>
+            <Label Grid.Row="2" Grid.Column="1" Content="{Binding Reference}" />
+
+        </Grid>
+        
+        <Separator  Grid.Row="1" Margin="3" />
+
+        <Border Grid.Row="2" BorderThickness="0" Margin="2" Focusable="False">
 
             <Grid Background="Transparent" IsEnabled="{Binding IsEnabled}">
                 <Grid.RowDefinitions>
@@ -67,10 +92,10 @@
             </Grid>
         </Border>
 
-        <DockPanel Grid.Row="4" Grid.ColumnSpan="3" LastChildFill="True">
+        <DockPanel Grid.Row="3" LastChildFill="True">
 
             <TextBlock Text="Rivejä yhteensä:" Style="{StaticResource InfoTextBlockSyle}" />
-            <TextBlock Text="{Binding Count}" Style="{StaticResource InfoTextBlockSyle}" />
+            <TextBlock Text="{Binding ItemCount}" Style="{StaticResource InfoTextBlockSyle}" />
 
             <ContentControl ContentTemplate="{StaticResource InvoiceTotalBarTemplate}" Content="{Binding}"/>
 

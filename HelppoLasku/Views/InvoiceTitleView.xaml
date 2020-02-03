@@ -16,8 +16,7 @@
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition MinWidth="50" Width="Auto" MaxWidth="100" x:Name="priceColumn"/>
-                <ColumnDefinition MinWidth="20" Width="Auto" MaxWidth="40" x:Name="countColumn"/>
-                <ColumnDefinition MinWidth="30" Width="Auto" MaxWidth="60" x:Name="unitColumn"/>
+                <ColumnDefinition MinWidth="50" Width="Auto" MaxWidth="100" x:Name="countColumn"/>
                 <ColumnDefinition MinWidth="20" Width="Auto" MaxWidth="40" x:Name="taxColumn"/>
                 <ColumnDefinition MinWidth="50" Width="Auto" MaxWidth="100" x:Name="totalColumn"/>
             </Grid.ColumnDefinitions>
@@ -30,11 +29,10 @@
             <Label Content="Nimike" Grid.Column="0"/>
             <Label Content="á-hinta" Grid.Column="1"/>
             <Label Content="Määrä" Grid.Column="2"/>
-            <Label Content="Yksikkö" Grid.Column="3"/>
-            <Label Content="ALV" Grid.Column="4"/>
-            <Label Content="Yhteensä" Grid.Column="5"/>
+            <Label Content="ALV" Grid.Column="3"/>
+            <Label Content="Yhteensä" Grid.Column="4"/>
 
-            <ItemsControl ItemsSource="{Binding Items}" Grid.Row="1" Grid.ColumnSpan="6" Margin="10,0,2,0" />
+            <ItemsControl ItemsSource="{Binding Items}" Grid.Row="1" Grid.ColumnSpan="5" Margin="10,0,2,0" />
 
         </Grid>
 

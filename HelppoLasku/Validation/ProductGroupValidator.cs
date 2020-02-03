@@ -20,7 +20,7 @@ namespace HelppoLasku.Validation
             switch (property)
             {
                 case "Name":
-                    return Validation.Required(property, ViewModel) ?? Validation.Unique(property, Model);
+                    return Validation.Unique(property, Model, true);
                 default:
                     return null;
             }

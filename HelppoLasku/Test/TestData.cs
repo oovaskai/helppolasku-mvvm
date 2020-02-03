@@ -39,11 +39,15 @@ namespace HelppoLasku.Test
                     Country = "Finland",
                     BIC = "BANKBIC",
                     IBAN = "FI 12345 60000 7890",
-                    DefaultExpire = 14,
-                    DefaultInterest = 11.5,
-                    ReferenceNumber = "0002",
-                    InvoiceID = 1003,
-                    DefaultTax = 24
+                    CompanyExpire = 10,
+                    PersonExpire = 14,
+                    CompanyInterest = 11.5,
+                    PersonInterest = 11.5,
+                    ReferenceBase = "0002",
+                    InvoiceID = 1002,
+                    Tax = -24,
+                    CompanyAnnotation = 7,
+                    PersonAnnotation = 7
                 }
             };
 
@@ -132,6 +136,7 @@ namespace HelppoLasku.Test
                 PayDate = new DateTime(2020, 1, 15),
                 Interest = 11.5,
                 Reference = "10003",
+                AnnotationTime = 7,
                 Titles = new List<InvoiceTitle>()
             };
             InvoiceTitle title1 = new InvoiceTitle
@@ -164,6 +169,7 @@ namespace HelppoLasku.Test
                 Paid = false,
                 Interest = 11.5,
                 Reference = "10016",
+                AnnotationTime = 7,
                 DueDate = new DateTime(2020, 2, 10),
                 Titles = new List<InvoiceTitle>()
             };

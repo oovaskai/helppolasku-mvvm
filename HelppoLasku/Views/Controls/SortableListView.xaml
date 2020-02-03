@@ -6,6 +6,7 @@
              xmlns:local="clr-namespace:HelppoLasku.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="250" d:DesignWidth="400"
+          
           MouseDoubleClick="HandleDoubleClick"
           GridViewColumnHeader.Click="ListViewColumnHeaderClick"
           ScrollViewer.HorizontalScrollBarVisibility="Auto" 

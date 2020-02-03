@@ -104,7 +104,9 @@ namespace HelppoLasku.Views.Controls
 
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs("Text"));
             popUp.IsOpen = string.IsNullOrEmpty(Text) ? false : true;
-            ItemsSource.Refresh();
+
+            if (ItemsSource != null)
+                ItemsSource.Refresh();
         }
 
         private void ItemListBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -147,6 +149,15 @@ namespace HelppoLasku.Views.Controls
 
         private void ItemListBox_PreviewKeyDown(object sender, KeyEventArgs e)
         {
+            if (e.Key == Key.Up && itemListBox.SelectedIndex == 0)
+            {
+                selectedItem = null;
+                SelectedItem = null;
+                filterTextBox.Focus();
+                filterTextBox.SelectAll();
+            }
+                
+
             if (e.Key == Key.Tab || e.Key == Key.Return)
             {
                 if (selectedItem == null)
@@ -158,6 +169,7 @@ namespace HelppoLasku.Views.Controls
             if (e.Key == Key.Escape)
             {
                 selectedItem = null;
+                SelectedItem = null;
                 popUp.IsOpen = false;
                 filterTextBox.Focus();
             }

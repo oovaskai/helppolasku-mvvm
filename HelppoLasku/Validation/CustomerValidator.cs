@@ -20,15 +20,15 @@ namespace HelppoLasku.Validation
             switch (property)
             {
                 case "Name":
-                    return Validation.Required(property, ViewModel) ?? Validation.Unique(property, Model) ;
+                    return Validation.Unique(property, Model, true) ;
                 case "CustomerID":
-                    return Validation.Unique(property, Model);
+                    return Validation.Unique(property, Model, false);
                 case "Address":
                 case "PostalCode":
                 case "City":
                     return Validation.Required(property, ViewModel);
                 case "Email":
-                    return Validation.Format(property, ViewModel);
+                    return Validation.Format(property, ViewModel, false);
                 default:
                     return null;
             }

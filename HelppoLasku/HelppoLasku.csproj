@@ -35,6 +35,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
@@ -58,6 +64,10 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataAccess\DataRepository.cs" />
+    <Compile Include="PDF\PdfCreator.cs" />
+    <Compile Include="PDF\PreviewPdf.xaml.cs">
+      <DependentUpon>PreviewPdf.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Validation\DataValidator.cs" />
     <Compile Include="DataAccess\IDataHandler.cs" />
     <Compile Include="DataAccess\Resources.cs" />
@@ -68,6 +78,7 @@
     <Compile Include="Validation\InvoiceValidator.cs" />
     <Compile Include="Validation\ProductGroupValidator.cs" />
     <Compile Include="Validation\ProductValidator.cs" />
+    <Compile Include="Validation\SendInvoiceValidator.cs" />
     <Compile Include="Validation\Validation.cs" />
     <Compile Include="Settings.cs" />
     <Compile Include="Test\IDGenerator.cs" />
@@ -91,10 +102,10 @@
     <Compile Include="ViewModels\Invoices\EditInvoiceItemViewModel.cs" />
     <Compile Include="ViewModels\Invoices\EditInvoiceTitleViewModel.cs" />
     <Compile Include="ViewModels\Invoices\EditInvoiceViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceCommandsViewModel.cs" />
     <Compile Include="ViewModels\Invoices\InvoiceFilterViewModel.cs" />
     <Compile Include="ViewModels\Invoices\InvoiceItemViewModel.cs" />
     <Compile Include="ViewModels\Invoices\InvoiceListViewModel.cs" />
+    <Compile Include="ViewModels\Invoices\SendInvoiceViewModel.cs" />
     <Compile Include="ViewModels\Invoices\InvoiceTitleViewModel.cs" />
     <Compile Include="ViewModels\Invoices\InvoiceViewModel.cs" />
     <Compile Include="ViewModels\Products\AllProductsViewModel.cs" />
@@ -168,8 +179,17 @@
     <Compile Include="Views\Controls\OkCancelButtonPanel.xaml.cs">
       <DependentUpon>OkCancelButtonPanel.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Controls\PayButton.xaml.cs">
+      <DependentUpon>PayButton.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\Controls\SearchTextBox.xaml.cs">
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SendButton.xaml.cs">
+      <DependentUpon>SendButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\SortableListColumn.xaml.cs">
+      <DependentUpon>SortableListColumn.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SortableListView.xaml.cs">
       <DependentUpon>SortableListView.xaml</DependentUpon>
@@ -219,6 +239,12 @@
     <Compile Include="Views\InvoiceListView.xaml.cs">
       <DependentUpon>InvoiceListView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\InvoiceStatusControl.xaml.cs">
+      <DependentUpon>InvoiceStatusControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SendInvoiceView.xaml.cs">
+      <DependentUpon>SendInvoiceView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\InvoiceTitleView.xaml.cs">
       <DependentUpon>InvoiceTitleView.xaml</DependentUpon>
     </Compile>
@@ -243,6 +269,10 @@
     <Compile Include="Views\WorkspaceControlView.xaml.cs">
       <DependentUpon>WorkspaceControlView.xaml</DependentUpon>
     </Compile>
+    <Page Include="PDF\PreviewPdf.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\AddButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -315,7 +345,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\Controls\PayButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\Controls\SearchTextBox.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SendButton.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Controls\SortableListColumn.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -384,6 +426,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\InvoiceResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\InvoiceStatusControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SendInvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -462,6 +512,7 @@
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -490,6 +541,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Images\folder-color.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\calendar_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Images\envelope_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

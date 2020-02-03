@@ -16,23 +16,39 @@ namespace HelppoLasku.ViewModels
             EditEnabled = true;
             Validator = new Validation.CompanyValidator(this);
 
+            MainMenuViewModel.SelectedCompany.ModelChanged += OnModelChanged;
+
             if (Model.IsNew)
             {
                 DisplayName = "Uusi yritys";
-                InvoiceID = 1;
-                Model.ReferenceNumber = "0001";
-                Model.DefaultTax = Properties.Settings.Default.DefaultTax;
-                Model.DefaultExpire = Properties.Settings.Default.DefaultExpire;
-                Model.DefaultInterest = Properties.Settings.Default.MaxInterest;
+
+                Model.InvoiceID = Properties.Settings.Default.DefaultInvoiceID;
+                Model.ReferenceBase = Properties.Settings.Default.DefaultReference;
+
+                Model.Tax = Properties.Settings.Default.DefaultTax;
+
+                Model.CompanyExpire = Properties.Settings.Default.MinCompanyExpire;
+                Model.CompanyInterest = Properties.Settings.Default.MaxInterest;
+                Model.CompanyAnnotation = Properties.Settings.Default.DefaultAnnotation;
+
+                Model.PersonExpire = Properties.Settings.Default.MinPersonExpire;
+                Model.PersonInterest = Properties.Settings.Default.MaxInterest;
+                Model.PersonAnnotation = Properties.Settings.Default.DefaultAnnotation;
             }
             else
             {
                 DisplayName = Name;
             }
 
-            DefaultTax = Model.DefaultTax.ToString();
-            DefaultExpire = Model.DefaultExpire.ToString();
-            DefaultInterest = Model.DefaultInterest.ToString("0.0");
+            Tax = Model.Tax.ToString();
+
+            CompanyExpire = Model.CompanyExpire.ToString();
+            CompanyInterest = Model.CompanyInterest.ToString("0.0");
+            CompanyAnnotation = Model.CompanyAnnotation.ToString();
+
+            PersonExpire = Model.PersonExpire.ToString();
+            PersonInterest = Model.PersonInterest.ToString("0.0");
+            PersonAnnotation = Model.PersonAnnotation.ToString();
 
             LogoManager = new ImageManagerViewModel(System.IO.Directory.GetCurrentDirectory() + @"\userdata\" + company.ID, Model.Logo);
             LogoManager.FileTypes = new List<string> { ".png", ".jpg", ".jpeg" };
@@ -52,9 +68,9 @@ namespace HelppoLasku.ViewModels
             set => base.Model = value;
         }
 
-        #region Properties
-
         public ImageManagerViewModel LogoManager { get; set; }
+
+        #region Invoicing
 
         public string BIC
         {
@@ -82,42 +98,6 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        string defaultExpire;
-
-        public string DefaultExpire
-        {
-            get => defaultExpire;
-            set
-            {
-                if (defaultExpire != value)
-                {
-                    if (int.TryParse(value, out int i))
-                        Model.DefaultExpire = i;
-
-                    defaultExpire = value;
-                    RaisePropertyChanged("DefaultExpire");
-                }
-            }
-        }
-
-        string defaultInterest;
-
-        public string DefaultInterest
-        {
-            get => defaultInterest;
-            set
-            {
-                if (defaultInterest != value)
-                {
-                    if (double.TryParse(value, out double d))
-                        Model.DefaultInterest = d;
-
-                    defaultInterest = value;
-                    RaisePropertyChanged("DefaultInterest");
-                }
-            }
-        }
-
         int invoiceID;
 
         public int InvoiceID
@@ -137,36 +117,21 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public string ReferenceNumber
+        public string ReferenceBase
         {
-            get => Model.ReferenceNumber;
+            get => Model.ReferenceBase;
             set
             {
-                if (Model.ReferenceNumber != value)
+                if (Model.ReferenceBase != value)
                 {
-                    Model.ReferenceNumber = value;
-                    RaisePropertyChanged("ReferenceNumber");
-                    RaisePropertyChanged("ReferenceCheckNumber");
+                    Model.ReferenceBase = value;
+                    RaisePropertyChanged("ReferenceBase");
+                    RaisePropertyChanged("ReferenceCheck");
                 }
             }
         }
 
-        public int ReferenceCheckNumber => Model.ReferenceCheck(Model.ReferenceNumber);
-
-        public string DefaultTax
-        {
-            get => Model.DefaultTax.ToString();
-            set
-            {
-                if (Model.DefaultTax.ToString() != value)
-                {
-                    Model.DefaultTax = double.Parse(value);
-                    RaisePropertyChanged("DefaultTax");
-                }
-            }
-        }
-
-        public string[] TaxRates => Properties.Settings.Default.TaxRates.Split(new char[] { '%' }, StringSplitOptions.RemoveEmptyEntries);
+        public int ReferenceCheck => Model.ReferenceCheck(Model.ReferenceBase);
 
         #endregion
 
@@ -192,14 +157,14 @@ namespace HelppoLasku.ViewModels
 
         bool CanEditID()
         {
-           return Model.IsNew ? false : true;
+            return Model.IsNew ? false : true;
         }
 
         public CommandViewModel SaveID { get; private set; }
 
         void OnSaveID()
         {
-            
+
             Model.InvoiceID = invoiceID;
             RaisePropertyChanged("InvoiceID");
 
@@ -233,6 +198,163 @@ namespace HelppoLasku.ViewModels
 
         #endregion
 
+        #region Customers
+
+        string companyAnnotation;
+
+        public string CompanyAnnotation
+        {
+            get => companyAnnotation;
+            set
+            {
+                if (companyAnnotation != value)
+                {
+                    if (int.TryParse(value, out int i))
+                        Model.CompanyAnnotation = i;
+
+                    companyAnnotation = value;
+                    RaisePropertyChanged("CompanyAnnotation");
+                }
+            }
+        }
+
+        string companyExpire;
+
+        public string CompanyExpire
+        {
+            get => companyExpire;
+            set
+            {
+                if (companyExpire != value)
+                {
+                    if (int.TryParse(value, out int i))
+                        Model.CompanyExpire = i;
+
+                    companyExpire = value;
+                    RaisePropertyChanged("CompanyExpire");
+                }
+            }
+        }
+
+        string companyInterest;
+
+        public string CompanyInterest
+        {
+            get => companyInterest;
+            set
+            {
+                if (companyInterest != value)
+                {
+                    if (double.TryParse(value, out double d))
+                        Model.CompanyInterest = d;
+
+                    companyInterest = value;
+                    RaisePropertyChanged("CompanyInterest");
+                }
+            }
+        }
+
+        string personAnnotation;
+
+        public string PersonAnnotation
+        {
+            get => personAnnotation;
+            set
+            {
+                if (personAnnotation != value)
+                {
+                    if (int.TryParse(value, out int i))
+                        Model.PersonAnnotation = i;
+
+                    personAnnotation = value;
+                    RaisePropertyChanged("PersonAnnotation");
+                }
+            }
+        }
+
+        string personExpire;
+
+        public string PersonExpire
+        {
+            get => personExpire;
+            set
+            {
+                if (personExpire != value)
+                {
+                    if (int.TryParse(value, out int i))
+                        Model.PersonExpire = i;
+
+                    personExpire = value;
+                    RaisePropertyChanged("PersonExpire");
+                }
+            }
+        }
+
+        string personInterest;
+
+        public string PersonInterest
+        {
+            get => personInterest;
+            set
+            {
+                if (personInterest != value)
+                {
+                    if (double.TryParse(value, out double d))
+                        Model.PersonInterest = d;
+
+                    personInterest = value;
+                    RaisePropertyChanged("PersonInterest");
+                }
+            }
+        }
+
+        #endregion
+
+        #region Products
+
+        public string[] TaxRates => Properties.Settings.Default.TaxRates.Split(new char[] { '%' }, StringSplitOptions.RemoveEmptyEntries);
+
+        public string Tax
+        {
+            get { return Model.Tax < 0 ? (Model.Tax * -1).ToString() : Model.Tax.ToString(); }
+            set
+            {
+                if (Model.Tax != double.Parse(value))
+                {
+                    Model.Tax = IsTaxed ? double.Parse(value) * -1 : double.Parse(value);
+                    RaisePropertyChanged("Tax");
+                    RaisePropertyChanged("IsTaxed");
+                }
+            }
+        }
+
+        public bool IsTaxed
+        {
+            get => Model.Tax < 0;
+            set
+            {
+                if (IsTaxed != value)
+                {
+                    Model.Tax *= -1;
+                    RaisePropertyChanged("IsTaxed");
+                }
+            }
+        }
+
+        #endregion
+
+        #region Base Overrides
+
+        public override void OnModelChanged(object sender, ModelChangedEventArgs e)
+        {
+            if (e.Type == ModelChangedEventArgs.EventType.Update && sender == MainMenuViewModel.SelectedCompany)
+            {
+                ReferenceBase = (sender as Company).ReferenceBase;
+                Model.InvoiceID = (sender as Company).InvoiceID;
+                RaisePropertyChanged("InvoiceID");
+            }
+            base.OnModelChanged(sender, e);
+        }
 
         public override void OnSave()
         {
@@ -247,5 +369,13 @@ namespace HelppoLasku.ViewModels
 
             return base.CanSave();
         }
+
+        protected override void OnDispose()
+        {
+            MainMenuViewModel.SelectedCompany.ModelChanged -= OnModelChanged;
+            base.OnDispose();
+        }
+
+        #endregion
     }
 }

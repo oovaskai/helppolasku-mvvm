@@ -9,10 +9,7 @@
       <Value Profile="(Default)">%NotSet%</Value>
     </Setting>
     <Setting Name="DefaultTax" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">24</Value>
-    </Setting>
-    <Setting Name="DefaultExpire" Type="System.Int32" Scope="User">
-      <Value Profile="(Default)">14</Value>
+      <Value Profile="(Default)">-24</Value>
     </Setting>
     <Setting Name="MaxInterest" Type="System.Double" Scope="User">
       <Value Profile="(Default)">11.5</Value>
@@ -22,6 +19,21 @@
     </Setting>
     <Setting Name="MaxReferenceLength" Type="System.Int32" Scope="User">
       <Value Profile="(Default)">19</Value>
+    </Setting>
+    <Setting Name="DefaultAnnotation" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="MinCompanyExpire" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">7</Value>
+    </Setting>
+    <Setting Name="MinPersonExpire" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="DefaultInvoiceID" Type="System.Int32" Scope="User">
+      <Value Profile="(Default)">1</Value>
+    </Setting>
+    <Setting Name="DefaultReference" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0001</Value>
     </Setting>
   </Settings>
 </SettingsFile>

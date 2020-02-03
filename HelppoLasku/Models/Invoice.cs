@@ -35,13 +35,13 @@ namespace HelppoLasku.Models
 
         public double? Interest { get; set; }
 
+        public int? AnnotationTime { get; set; }
+
         public List<InvoiceTitle> Titles { get; set; }
 
         public string Info { get; set; }
 
-        public string File { get; set; }
-
-        internal override string[] CopyProperties => new string[] { "InvoiceID", "Customer", "Date", "Paid", "DueDate", "PayDate", "Reference", "Interest", "Info", "File" };
+        internal override string[] CopyProperties => new string[] { "InvoiceID", "Customer", "Date", "Paid", "DueDate", "PayDate", "Reference", "Interest", "AnnotationTime", "Info" };
 
         public override void CopyTo(DataModel target, out string[] copiedProperties)
         {

@@ -30,15 +30,15 @@
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Tila" >
+                    <GridViewColumn Header="Tila">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
-                                <TextBlock Text="{Binding Status}" TextAlignment="Center" Style="{StaticResource StatusTextBlockStyle}" />
+                                <TextBlock Text="{Binding Status}" TextAlignment="Right" Style="{StaticResource StatusTextBlockStyle}" />
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
 
-                    <GridViewColumn Header="Laskunumero" >
+                    <GridViewColumn Header="Laskunumero">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding InvoiceID}" TextAlignment="Right" />
@@ -90,6 +90,14 @@
 
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem DataContext="{Binding Commands.New}" Icon="{StaticResource newImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
+                    <MenuItem DataContext="{Binding Commands.Edit}" Icon="{StaticResource editImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
+                    <MenuItem DataContext="{Binding Commands.Copy}" Icon="{StaticResource copyImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
+                    <MenuItem DataContext="{Binding Commands.Delete}" Icon="{StaticResource deleteImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </controls:SortableListView>
 
         <DockPanel Grid.Row="1" LastChildFill="True">

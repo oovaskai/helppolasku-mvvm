@@ -40,24 +40,23 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="{Binding ElementName=priceColumn, Path=ActualWidth}" />
                 <ColumnDefinition Width="{Binding ElementName=countColumn, Path=ActualWidth}" />
-                <ColumnDefinition Width="{Binding ElementName=unitColumn, Path=ActualWidth}" />
                 <ColumnDefinition Width="{Binding ElementName=taxColumn, Path=ActualWidth}" />
                 <ColumnDefinition Width="{Binding ElementName=totalColumn, Path=ActualWidth}" />
             </Grid.ColumnDefinitions>
 
             <TextBlock Grid.Column="0" Text="{Binding Content}" />
             <TextBlock Grid.Column="1" Text="{Binding TaxlessPrice, ConverterCulture='fi-FI', StringFormat={}{0:C}}" TextAlignment="Right"/>
-            <TextBlock Grid.Column="2" Text="{Binding Count}" TextAlignment="Center"/>
-            <TextBlock Grid.Column="3" Text="{Binding Unit}" TextAlignment="Center"/>
-            <TextBlock Grid.Column="4" Text="{Binding Tax, StringFormat={}{00} %}" TextAlignment="Right"/>
-            <TextBlock Grid.Column="5" Text="{Binding Total, ConverterCulture='fi-FI', StringFormat={}{0:C}}" TextAlignment="Right"/>
+
+            <DockPanel Grid.Column="2" HorizontalAlignment="Center">
+                <TextBlock Text="{Binding Count}" TextAlignment="Right" Margin="0,0,4,0"/>
+                <TextBlock Text="{Binding Unit}" TextAlignment="Left"/>
+            </DockPanel>
+
+            <TextBlock Grid.Column="3" Text="{Binding Tax, StringFormat={}{00} %}" TextAlignment="Right"/>
+            <TextBlock Grid.Column="4" Text="{Binding Total, ConverterCulture='fi-FI', StringFormat={}{0:C}}" TextAlignment="Right"/>
         </Grid>
     </DataTemplate>
 
-
-    <DataTemplate DataType="{x:Type viewmodels:InvoiceCommandsViewModel}" >
-        <local:InvoiceCommandsView />
-    </DataTemplate>
 
     <DataTemplate x:Key="InvoiceTotalBarTemplate">
         <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
@@ -130,6 +129,13 @@
         <Setter Property="Focusable" Value="False" />
     </Style>
 
+    <Style TargetType="MenuItem" x:Key="InvoiceListMenuItemStyle">
+        <Setter Property="Header" Value="{Binding DisplayName}" />
+        <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+        <Setter Property="Command" Value="{Binding Command}" />
+        <Setter Property="Visibility" Value="{Binding Visibility}" />
+    </Style>
+
     <DataTemplate DataType="{x:Type viewmodels:EditInvoiceTitleViewModel}">
         <local:EditInvoiceTitleView />
     </DataTemplate>
@@ -137,5 +143,10 @@
     <DataTemplate DataType="{x:Type viewmodels:EditInvoiceItemViewModel}">
         <local:EditInvoiceItemView />
     </DataTemplate>
+
+    <Image Source="/Images/plus_green.png" x:Key="newImage" Height="13" />
+    <Image Source="/Images/copy-blue.png" x:Key="copyImage" Height="12" />
+    <Image Source="/Images/pencil-edit-button.png" x:Key="editImage" Height="13" />
+    <Image Source="/Images/clear.png" x:Key="deleteImage" Height="10" />
 
 </ResourceDictionary>

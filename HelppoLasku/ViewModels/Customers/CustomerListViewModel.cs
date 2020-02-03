@@ -15,6 +15,8 @@ namespace HelppoLasku.ViewModels
         {
             DisplayName = "Asiakkaat";
             Filter = new CustomerFilterViewModel();
+
+            Invoice = new CommandViewModel("Laskuta", "Luo uusi lasku tälle asiakkaalle.", OnInvoice, CanEdit);
         }
 
         public override DataViewModel NewItem(DataModel model)
@@ -26,15 +28,21 @@ namespace HelppoLasku.ViewModels
             set => base.SelectedItem = value;
         }
 
+        public CommandViewModel Invoice { get; private set; }
+
+        void OnInvoice()
+        {
+            MainMenuViewModel.EditInvoice(new Invoice { Customer = SelectedItem.Model });
+        }
+
         public override void OnNew()
         {
-            Views.MainWindow.EditDialog(new EditCustomerViewModel(new Customer()), 600, 500);
+            MainMenuViewModel.EditCustomer(new Customer());
         }
 
         public override void OnEdit()
         {
-            Customer customer = new Customer(SelectedItem.Model);
-            Views.MainWindow.EditDialog(new EditCustomerViewModel(customer), 600, 500);
+            MainMenuViewModel.EditCustomer(new Customer(SelectedItem.Model));
         }
 
         public override void OnDelete()

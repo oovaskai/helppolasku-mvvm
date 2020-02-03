@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Collections.ObjectModel;
 using HelppoLasku.Models;
+using HelppoLasku.DataAccess;
 
 namespace HelppoLasku.ViewModels
 {
@@ -13,7 +14,11 @@ namespace HelppoLasku.ViewModels
         public InvoiceViewModel(Invoice invoice) : base(invoice)
         {
             if (invoice.Customer != null)
+            {
                 Customer = new CustomerViewModel(invoice.Customer);
+                Customer.Model.ModelChanged += OnModelChanged;
+            }
+                
 
             LoadTitles(invoice);
         }
@@ -37,14 +42,21 @@ namespace HelppoLasku.ViewModels
             {
                 if (customer != value)
                 {
+                    if (customer != null)
+                        customer.Model.ModelChanged -= OnModelChanged;
+
                     customer = value;
-                    Model.Customer = value.Model;
+
+                    if (value != null)
+                        customer.Model.ModelChanged += OnModelChanged;
+
+                    Model.Customer = value != null ? value.Model : null;
                     RaisePropertyChanged("Customer");
                 }
             }
         }
 
-        public int? InvoiceID
+        public virtual int? InvoiceID
         {
             get => Model.InvoiceID;
             set
@@ -57,7 +69,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public DateTime? Date
+        public virtual DateTime? Date
         {
             get => Model.Date;
             set
@@ -70,7 +82,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public bool? Paid
+        public virtual bool? Paid
         {
             get => Model.Paid;
             set
@@ -89,7 +101,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public DateTime? DueDate
+        public virtual DateTime? DueDate
         {
             get => Model.DueDate;
             set
@@ -102,7 +114,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public DateTime? PayDate
+        public virtual DateTime? PayDate
         {
             get => Model.PayDate;
             set
@@ -115,7 +127,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public string Reference
+        public virtual string Reference
         {
             get => Model.Reference;
             set
@@ -128,7 +140,20 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public double? Interest
+        public virtual int? AnnotationTime
+        {
+            get => Model.AnnotationTime;
+            set
+            {
+                if (Model.AnnotationTime != value)
+                {
+                    Model.AnnotationTime = value;
+                    RaisePropertyChanged("AnnotationTime");
+                }
+            }
+        }
+
+        public virtual double? Interest
         {
             get => Model.Interest;
             set
@@ -177,7 +202,25 @@ namespace HelppoLasku.ViewModels
 
         public double Total => GetTotal();
 
-        public string File => Model.File?.Remove(0, Model.File.LastIndexOf(@"\"));
+        public int ItemCount
+        {
+            get
+            {
+                int count = 0;
+                foreach (InvoiceTitleViewModel title in Titles)
+                    count += title.Items.Count;
+
+                return count;
+            }
+        }
+
+        public virtual void OnItemsChanged()
+        {
+            RaisePropertyChanged("ItemCount");
+            RaisePropertyChanged("Taxless");
+            RaisePropertyChanged("Taxed");
+            RaisePropertyChanged("Total");
+        }
 
         #endregion
 
@@ -215,6 +258,27 @@ namespace HelppoLasku.ViewModels
                 taxless += title.Taxless;
             return taxless;
 
+        }
+
+        public override void OnModelChanged(object sender, ModelChangedEventArgs e)
+        {
+            if (Customer != null && sender.Equals(Customer.Model) && e.Type == ModelChangedEventArgs.EventType.Delete)
+                Customer = null;
+
+            else if (e.Type == ModelChangedEventArgs.EventType.Update && e.Properties.Contains("Customer"))
+                Customer = (sender as Invoice).Customer != null ? Customer = new CustomerViewModel(Model.Customer) : null;
+
+            LoadTitles(Model);
+            OnItemsChanged();
+
+            base.OnModelChanged(sender, e);
+        }
+
+        protected override void OnDispose()
+        {
+            if (Customer != null)
+                Customer.Model.ModelChanged -= OnModelChanged;
+            base.OnDispose();
         }
 
         #endregion

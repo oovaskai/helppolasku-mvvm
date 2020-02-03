@@ -34,7 +34,7 @@ namespace HelppoLasku.ViewModels
 
         public override void OnEdit()
         {
-            Views.MainWindow.EditDialog(new EditProductViewModel(new Product(SelectedItem.Model)), 500, 350);
+            MainMenuViewModel.EditProduct(new Product(SelectedItem.Model));
         }
 
         public override void OnCopy()
@@ -42,7 +42,7 @@ namespace HelppoLasku.ViewModels
             Product copy = new Product();
             SelectedItem.Model.CopyTo(copy);
 
-            Views.MainWindow.EditDialog(new EditProductViewModel(copy), 500, 350);
+            MainMenuViewModel.EditProduct(copy);
         }
 
         public override void OnDelete()

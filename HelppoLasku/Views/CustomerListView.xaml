@@ -14,7 +14,18 @@
             <Setter Property="Margin" Value="2,0,2,0" />
             <Setter Property="Focusable" Value="False" />
         </Style>
-        
+
+        <Style TargetType="MenuItem">
+            <Setter Property="Header" Value="{Binding DisplayName}" />
+            <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+            <Setter Property="Command" Value="{Binding Command}" />
+        </Style>
+
+        <Image Source="/Images/plus_green.png" x:Key="newImage" Height="13" />
+        <Image Source="/Images/envelope_white.png" x:Key="invoiceImage" Height="13" />
+        <Image Source="/Images/pencil-edit-button.png" x:Key="editImage" Height="13" />
+        <Image Source="/Images/clear.png" x:Key="deleteImage" Height="10" />
+
     </UserControl.Resources>
     
     
@@ -48,6 +59,14 @@
 
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem DataContext="{Binding Commands.New}" Icon="{StaticResource newImage}" />
+                    <MenuItem DataContext="{Binding Invoice}" Icon="{StaticResource invoiceImage}" />
+                    <MenuItem DataContext="{Binding Commands.Edit}" Icon="{StaticResource editImage}" />
+                    <MenuItem DataContext="{Binding Commands.Delete}" Icon="{StaticResource deleteImage}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </controls:SortableListView>
 
         <GridSplitter Grid.Row="2" Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="LightGray" Margin="0,10,0,2"/>

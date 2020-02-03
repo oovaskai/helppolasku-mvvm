@@ -24,9 +24,9 @@ namespace HelppoLasku.Validation
                 case "Name":
                     return Validation.Required(property, ViewModel);
                 case "Price":
-                    return Validation.Required(property, ViewModel) ?? Validation.Format(property, ViewModel);
+                    return Validation.Format(property, ViewModel, true);
                 case "ProductID":
-                    return Validation.Unique(property, Model);
+                    return Validation.Unique(property, Model, false);
                 default:
                     return null;
 

@@ -70,13 +70,13 @@ namespace HelppoLasku.ViewModels
             Invoice invoice = new Invoice();
             InvoiceTitle title = new InvoiceTitle();
             invoice.Titles.Add(title);
-            title.Items.Add(new InvoiceItem { Tax = MainMenuViewModel.SelectedCompany.DefaultTax });
+            title.Items.Add(new InvoiceItem { Tax = MainMenuViewModel.SelectedCompany.Tax });
             MainWindowViewModel.WorkspaceControl.New(new EditInvoiceViewModel(invoice), false);
         }
 
         public override void OnEdit()
         {
-            MainWindowViewModel.WorkspaceControl.New(new EditInvoiceViewModel(new Invoice(SelectedItem.Model)), true);
+            MainMenuViewModel.EditInvoice(new Invoice(SelectedItem.Model));
         }
 
         public override void OnCopy()
@@ -87,8 +87,12 @@ namespace HelppoLasku.ViewModels
             copy.DueDate = null;
             copy.PayDate = null;
             copy.Paid = null;
+            copy.InvoiceID = null;
+            copy.Reference = null;
+            copy.AnnotationTime = null;
+            copy.Interest = null;
 
-            MainWindowViewModel.WorkspaceControl.New(new EditInvoiceViewModel(copy), false);
+            MainMenuViewModel.EditInvoice(copy);
         }
 
         public override bool CanDelete()

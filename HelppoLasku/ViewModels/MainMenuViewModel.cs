@@ -22,8 +22,7 @@ namespace HelppoLasku.ViewModels
             {
                 CompanyMenu.SelectedItem = company;
                 Invoices.Command.Execute(null);
-            }
-                
+            }  
 
             if (CompanyMenu.Items.Count < 1)
                 CompanyMenu.OnNew();
@@ -40,7 +39,6 @@ namespace HelppoLasku.ViewModels
 
             SelectedCompany = (e.NewSelection as CompanyMenuItemViewModel).Model;
             Properties.Settings.Default.SelectedCompany = SelectedCompany.ID;
-            Properties.Settings.Default.DefaultTax = SelectedCompany.DefaultTax;
             Properties.Settings.Default.Save();
 
             //Resources.Initialize();
@@ -54,16 +52,24 @@ namespace HelppoLasku.ViewModels
 
         public CommandViewModel Products => new CommandViewModel("Selaa tuotteita", () => MainWindowViewModel.WorkspaceControl.New(new AllProductsViewModel(), true));
 
-        public CommandViewModel NewProduct => new CommandViewModel("Uusi tuote", () => Views.MainWindow.EditDialog(new EditProductViewModel(new Product()), 500, 350));
+        public CommandViewModel NewProduct => new CommandViewModel("Uusi tuote", () => EditProduct(new Product()));
 
         public CommandViewModel Customers => new CommandViewModel("Selaa asiakkaita", () => MainWindowViewModel.WorkspaceControl.New(new CustomerListViewModel(Resources.GetModels<Customer>()), true));
 
-        public CommandViewModel NewCustomer => new CommandViewModel("Uusi asiakas", () => Views.MainWindow.EditDialog(new EditCustomerViewModel(new Customer()), 600, 500));
+        public CommandViewModel NewCustomer => new CommandViewModel("Uusi asiakas", () => EditCustomer(new Customer()));
 
         public CommandViewModel Invoices => new CommandViewModel("Selaa laskuja", () => MainWindowViewModel.WorkspaceControl.New(new AllInvoicesViewModel(), true));
 
-        public CommandViewModel NewInvoice => new CommandViewModel("Uusi lasku", () => MainWindowViewModel.WorkspaceControl.New(new EditInvoiceViewModel(new Invoice()), false));
+        public CommandViewModel NewInvoice => new CommandViewModel("Uusi lasku", () => EditInvoice(new Invoice()));
 
+        public static void EditProduct(Product product)
+            => Views.MainWindow.EditDialog(new EditProductViewModel(product), 500, 350);
+
+        public static void EditCustomer(Customer customer)
+            => Views.MainWindow.EditDialog(new EditCustomerViewModel(customer), 600, 500);
+
+        public static void EditInvoice(Invoice invoice)
+            => MainWindowViewModel.WorkspaceControl.New(new EditInvoiceViewModel(invoice), !invoice.IsNew);
 
         #endregion
 

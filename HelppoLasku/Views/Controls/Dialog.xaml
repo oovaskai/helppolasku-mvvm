@@ -20,6 +20,10 @@
             <views:EditCustomerView />
         </DataTemplate>
 
+        <DataTemplate DataType="{x:Type viewmodels:SendInvoiceViewModel}">
+            <views:SendInvoiceView />
+        </DataTemplate>
+
     </Window.Resources>
 
     <Border Margin="5" Background="WhiteSmoke" BorderBrush="LightGray" BorderThickness="1">

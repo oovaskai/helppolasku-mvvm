@@ -28,15 +28,12 @@ namespace HelppoLasku.DataAccess
             try
             {
                 foreach (string property in CopyProperties)
-                {
-                    target.GetType().GetProperty(property).SetValue(target, GetType().GetProperty(property).GetValue(this));
-                }
+                    target.GetType().GetProperty(property).SetValue(target, GetType().GetProperty(property).GetValue(this)); 
             }
             catch (Exception e)
             {
                 Views.MainWindow.Message(e.Message, "Kopiointivirhe", System.Windows.MessageBoxImage.Error);
-            }
-
+            }                
         }
 
         public virtual void CopyTo(DataModel target, out string[] copiedProperties)
@@ -51,7 +48,7 @@ namespace HelppoLasku.DataAccess
                     object targetValue = target.GetType().GetProperty(property).GetValue(target);
 
                     if (!(thisValue == null && targetValue == null) && ((thisValue == null && targetValue != null) ||
-                        (thisValue != null && targetValue == null) || thisValue.ToString() != targetValue.ToString()))
+                        (thisValue != null && targetValue == null) || thisValue.ToString() != targetValue.ToString() || !thisValue.Equals(targetValue)))
                     {
                         target.GetType().GetProperty(property).SetValue(target, GetType().GetProperty(property).GetValue(this));
                         changedProps.Add(property);

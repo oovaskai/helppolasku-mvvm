@@ -55,7 +55,7 @@
 
             <controls:InputPanel Header="Yleiset" DockPanel.Dock="Top">
                 <controls:TextInputControl Title="Y-tunnus:" Text="{Binding CompanyID, ValidatesOnDataErrors=True}" ToolTip="Y-Tunnus"/>
-                <controls:TextInputControl Title="Puhelin:" Text="{Binding Phone}"/>
+                <controls:TextInputControl Title="Puhelin:" Text="{Binding Phone, ValidatesOnDataErrors=True}"/>
                 <controls:TextInputControl Title="Sähköposti:" Text="{Binding Email, ValidatesOnDataErrors=True}"/>
                 <controls:TextInputControl Title="Kotisivu:" Text="{Binding WebPage}"/>
             </controls:InputPanel>
@@ -72,7 +72,7 @@
                 <controls:TextInputControl Title="Maa:" Text="{Binding Country}"/>
             </controls:InputPanel>
 
-            <controls:TextLongInputControl Header="Lisätietoa"/>
+            <controls:TextLongInputControl Header="Lisätietoa" Text="{Binding Info}" DockPanel.Dock="Top"/>
 
         </DockPanel>
 
@@ -81,22 +81,6 @@
             <controls:InputPanel Header="Laskutustiedot" DockPanel.Dock="Top">
                 <controls:TextInputControl Title="BIC:" Text="{Binding BIC, ValidatesOnDataErrors=True}" IsEnabled="{Binding IsEnabled}"/>
                 <controls:TextInputControl Title="IBAN:" Text="{Binding IBAN, ValidatesOnDataErrors=True}" IsEnabled="{Binding IsEnabled}"/>
-                <controls:TextUnitInputControl Title="Maksuehto:" Text="{Binding DefaultExpire, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
-                <controls:TextUnitInputControl Title="Viivästyskorko:" Text="{Binding DefaultInterest, ValidatesOnDataErrors=True}" Unit="%" IsEnabled="{Binding IsEnabled}"/>
-                <controls:TextUnitInputControl Title="Viitenumero:" Text="{Binding ReferenceNumber, ValidatesOnDataErrors=True}" Unit="{Binding ReferenceCheckNumber}" IsEnabled="{Binding IsEnabled}"/>
-
-                <Grid IsEnabled="{Binding IsEnabled}">
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="Auto" SharedSizeGroup="Titles" />
-                        <ColumnDefinition Width="*" />
-                        <ColumnDefinition Width="Auto" SharedSizeGroup="Units" />
-                    </Grid.ColumnDefinitions>
-
-                    <Label Content="Oletus ALV:" />
-                    <ComboBox Grid.Column="1" ItemsSource="{Binding TaxRates}" SelectedItem="{Binding DefaultTax}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="2"/>
-                    <Label Content="%" Grid.Column="2" />
-
-                </Grid>
 
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -114,9 +98,44 @@
                         <controls:OkButton DataContext="{Binding SaveID}" IsDefault="True" />
                         <controls:DeleteButton DataContext="{Binding CancelID}" />
                     </DockPanel>
-                    
-
                 </Grid>
+
+                <controls:TextUnitInputControl Title="Viitenumero:" Text="{Binding ReferenceBase, ValidatesOnDataErrors=True}" Unit="{Binding ReferenceCheck}" IsEnabled="{Binding IsEnabled}"/>
+
+                <controls:InputPanel Header="Yritysasiakkaat" Grid.ColumnSpan="2" />
+                
+                <controls:TextUnitInputControl Title="Maksuehto:" Text="{Binding CompanyExpire, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Huomautusaika:" Text="{Binding CompanyAnnotation, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Viivästyskorko:" Text="{Binding CompanyInterest, ValidatesOnDataErrors=True}" Unit="%" IsEnabled="{Binding IsEnabled}"/>
+                
+                <controls:InputPanel Header="Henkilöasiakkaat" Grid.ColumnSpan="2" />
+
+                <controls:TextUnitInputControl Title="Maksuehto:" Text="{Binding PersonExpire, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Huomautusaika:" Text="{Binding PersonAnnotation, ValidatesOnDataErrors=True}" Unit="päivää" IsEnabled="{Binding IsEnabled}"/>
+                <controls:TextUnitInputControl Title="Viivästyskorko:" Text="{Binding PersonInterest, Mode=OneWay}" Unit="%" IsEnabled="False"/>
+
+                <controls:InputPanel Header="Tuotteet" DockPanel.Dock="Top"/>
+
+                <Grid IsEnabled="{Binding IsEnabled}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Titles" />
+                        <ColumnDefinition Width="*" />
+                        <ColumnDefinition Width="Auto" SharedSizeGroup="Units" />
+                    </Grid.ColumnDefinitions>
+
+                    <Label Content="Oletus ALV:" />
+                    
+                    <DockPanel Grid.Column="1" LastChildFill="True">
+                        
+                        <Label Content="Sisältyy hintaan:" DockPanel.Dock="Right"/>
+                        <Label Content="%" DockPanel.Dock="Right"/>
+                        <ComboBox ItemsSource="{Binding TaxRates}" SelectedItem="{Binding Tax}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="2"/>
+                        
+                    </DockPanel>
+
+                    <CheckBox IsChecked="{Binding IsTaxed}" Grid.Column="2" Margin="2,7,0,0"/>
+                </Grid>
+
             </controls:InputPanel>
 
             <DockPanel LastChildFill="True" VerticalAlignment="Bottom" >

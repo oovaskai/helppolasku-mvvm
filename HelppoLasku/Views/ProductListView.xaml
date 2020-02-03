@@ -7,6 +7,19 @@
              xmlns:controls="clr-namespace:HelppoLasku.Views.Controls"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
+
+    <UserControl.Resources>
+        <Style TargetType="MenuItem">
+            <Setter Property="Header" Value="{Binding DisplayName}" />
+            <Setter Property="ToolTip" Value="{Binding ToolTip}" />
+            <Setter Property="Command" Value="{Binding Command}" />
+        </Style>
+
+        <Image Source="/Images/plus_green.png" x:Key="newImage" Height="13" />
+        <Image Source="/Images/copy-blue.png" x:Key="copyImage" Height="12" />
+        <Image Source="/Images/pencil-edit-button.png" x:Key="editImage" Height="13" />
+        <Image Source="/Images/clear.png" x:Key="deleteImage" Height="10" />
+    </UserControl.Resources>
     
     <Grid>
         <Grid.RowDefinitions>
@@ -56,6 +69,14 @@
                     
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem DataContext="{Binding Commands.New}" Icon="{StaticResource newImage}" />
+                    <MenuItem DataContext="{Binding Commands.Edit}" Icon="{StaticResource editImage}" />
+                    <MenuItem DataContext="{Binding Commands.Copy}" Icon="{StaticResource copyImage}" />
+                    <MenuItem DataContext="{Binding Commands.Delete}" Icon="{StaticResource deleteImage}" />
+                </ContextMenu>
+            </ListView.ContextMenu>
         </controls:SortableListView>
 
         <GridSplitter Grid.Row="2" Height="4" HorizontalAlignment="Stretch" VerticalAlignment="Center" Background="LightGray" Margin="0,10,0,2" Focusable="False"/>

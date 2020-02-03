@@ -45,7 +45,7 @@ namespace HelppoLasku.ViewModels
             }
         }
 
-        public string DetailName => Name + " | " + TaxlessPrice.ToString("0.00 €") + " / " + Unit + " + " + Tax + " % " + " = " + TotalPrice.ToString("0.00 €" + " | " + Group.Name);
+        public string DetailName => Name + " | " + TaxlessPrice.ToString("0.00 €") + " / " + Unit + " + " + Tax + " % " + " = " + TotalPrice.ToString("0.00 €" + (Group == null ? "" : " | " + Group.Name));
 
         public string Name
         {
@@ -131,7 +131,7 @@ namespace HelppoLasku.ViewModels
                 if ((sender as Product).Group == null)
                     Group = null;
                 else
-                Group = new ProductGroupViewModel(Model.Group);
+                    Group = new ProductGroupViewModel(Model.Group);
             }
             else if(e.Type == DataAccess.ModelChangedEventArgs.EventType.Update && (e.Properties.Contains("Price") || e.Properties.Contains("Tax")))
             {

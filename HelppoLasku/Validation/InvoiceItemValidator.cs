@@ -23,7 +23,7 @@ namespace HelppoLasku.Validation
                     return Validation.Required(property, ViewModel);
                 case "Count":
                 case "Price":
-                    return Validation.Required(property, ViewModel) ?? Validation.Format(property, ViewModel);
+                    return Validation.Format(property, ViewModel, true);
                 default:
                     return null;
             }

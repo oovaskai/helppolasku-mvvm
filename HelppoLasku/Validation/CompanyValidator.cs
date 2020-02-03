@@ -15,7 +15,10 @@ namespace HelppoLasku.Validation
 
         protected override string[] Properties => new string[] 
         {
-            "Name", "CompanyID", "Email", "Address", "PostalCode", "City", "BIC", "IBAN", "ReferenceNumber", "InvoiceID", "DefaultExpire", "DefaultInterest"
+            "Name", "CompanyID", "Phone", "Email", "Address", "PostalCode", "City",
+            "BIC", "IBAN", "ReferenceBase", "InvoiceID",
+            "CompanyExpire", "CompanyInterest", "CompanyAnnotation",
+            "PersonExpire", "PersonAnnotation"
         };
 
         public override string Validate(string property)
@@ -24,7 +27,7 @@ namespace HelppoLasku.Validation
             {
                 case "Name":
                 case "CompanyID":
-                    return Validation.Required(property, ViewModel) ?? Validation.Unique(property, Model);
+                    return Validation.Unique(property, Model, true);
                 case "Address":
                 case "PostalCode":
                 case "City":
@@ -32,12 +35,16 @@ namespace HelppoLasku.Validation
                 case "BIC":
                 case "IBAN":
                     return Validation.Required(property, ViewModel);
-                case "DefaultExpire":
-                case "ReferenceNumber":
-                case "DefaultInterest":
-                    return Validation.Required(property, ViewModel) ?? Validation.Format(property, ViewModel);
+                case "ReferenceBase":
+                case "CompanyExpire":
+                case "CompanyInterest":
+                case "CompanyAnnotation":
+                case "PersonExpire":
+                case "PersonAnnotation":
+                    return Validation.Format(property, ViewModel, true);
                 case "Email":
-                    return Validation.Format(property, ViewModel);
+                case "Phone":
+                    return Validation.Format(property, ViewModel, false);
                 default:
                     return null;
             }

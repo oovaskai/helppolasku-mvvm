@@ -36,7 +36,6 @@ namespace HelppoLasku.ViewModels
 
         public string ToolTip { get; private set; }
 
-
         System.Windows.Visibility visibility;
 
         public System.Windows.Visibility Visibility
@@ -51,5 +50,7 @@ namespace HelppoLasku.ViewModels
                 }
             }
         }
+
+        public void Execute() => Command.Execute(null);
     }
 }

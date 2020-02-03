@@ -13,14 +13,30 @@ namespace HelppoLasku.Validation
         {
         }
 
-        protected override string[] Properties => new string[] { "Customer" };
+        new EditInvoiceViewModel ViewModel => base.ViewModel as EditInvoiceViewModel;
+
+        protected override string[] Properties => new string[] { "Customer", "Items" };
 
         public override string Validate(string property)
         {
             switch (property)
             {
                 case "Customer":
-                    return Validation.Required(property, Model);
+                    {
+                        if (ViewModel.Paid != null)
+                            return null;
+                        return Validation.Required(property, Model);
+                    }
+                    
+                case "Items":
+                    {
+                        if (ViewModel.ItemCount == 0)
+                            return "Laskulla pitää olla sisältöä.";
+                        foreach (EditInvoiceTitleViewModel title in ViewModel.Titles)
+                            if (title.Error != null)
+                                return title.Error;
+                        return null;
+                    }
                 default:
                     return null;
             }

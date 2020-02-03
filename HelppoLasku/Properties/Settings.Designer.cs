@@ -49,25 +49,13 @@ namespace HelppoLasku.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("24")]
+        [global::System.Configuration.DefaultSettingValueAttribute("-24")]
         public double DefaultTax {
             get {
                 return ((double)(this["DefaultTax"]));
             }
             set {
                 this["DefaultTax"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("14")]
-        public int DefaultExpire {
-            get {
-                return ((int)(this["DefaultExpire"]));
-            }
-            set {
-                this["DefaultExpire"] = value;
             }
         }
         
@@ -104,6 +92,66 @@ namespace HelppoLasku.Properties {
             }
             set {
                 this["MaxReferenceLength"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int DefaultAnnotation {
+            get {
+                return ((int)(this["DefaultAnnotation"]));
+            }
+            set {
+                this["DefaultAnnotation"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("7")]
+        public int MinCompanyExpire {
+            get {
+                return ((int)(this["MinCompanyExpire"]));
+            }
+            set {
+                this["MinCompanyExpire"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("14")]
+        public int MinPersonExpire {
+            get {
+                return ((int)(this["MinPersonExpire"]));
+            }
+            set {
+                this["MinPersonExpire"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
+        public int DefaultInvoiceID {
+            get {
+                return ((int)(this["DefaultInvoiceID"]));
+            }
+            set {
+                this["DefaultInvoiceID"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0001")]
+        public string DefaultReference {
+            get {
+                return ((string)(this["DefaultReference"]));
+            }
+            set {
+                this["DefaultReference"] = value;
             }
         }
     }

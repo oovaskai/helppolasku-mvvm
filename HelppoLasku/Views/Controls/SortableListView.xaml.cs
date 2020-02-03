@@ -35,7 +35,9 @@ namespace HelppoLasku.Views.Controls
             if (headerClicked.Role == GridViewColumnHeaderRole.Padding)
                 return;
 
-            var sortingColumn = (headerClicked.Column.DisplayMemberBinding as Binding)?.Path?.Path;
+            var sortingColumn = (headerClicked.Column.DisplayMemberBinding as Binding)?.Path?.Path 
+                ?? (headerClicked.Column.CellTemplate.LoadContent() as TextBlock).GetBindingExpression(TextBlock.TextProperty).ParentBinding?.Path?.Path;
+
             if (sortingColumn == null)
                 return;
 

@@ -18,7 +18,7 @@ namespace HelppoLasku.ViewModels
             EditEnabled = true;
             Validator = new Validation.InvoiceValidator(this);
 
-            DisplayName = Model.IsNew ? "Uusi lasku" : "Muokkaa laskua " + InvoiceID;
+            DisplayName = Model.IsNew ? "Uusi lasku" : "Lasku " + (InvoiceID == null ? Status : InvoiceID.ToString()) + (Customer == null ? null : " - " + Customer.Name);
 
             if (Paid != null)
                 IsEnabled = false;
@@ -29,22 +29,13 @@ namespace HelppoLasku.ViewModels
 
             CustomerList.SelectionChanged += CustomerListSelectionChanged;
 
-            StatusCommands = new InvoiceCommandsViewModel(this);  
+            Send = new CommandViewModel("Laskuta", OnSend, CanSend);
+            Pay = new CommandViewModel("Merkitse maksetuksi", OnPay, CanPay);
+            SavePay = new CommandViewModel("Aseta maksupäivä", OnSavePay);
+            CancelPay = new CommandViewModel("Peruuta", OnCancelPay);
         }
 
         public ProductFilterViewModel ProductFilter { get; set; }
-
-        public int Count
-        {
-            get
-            {
-                int count = 0;
-                foreach (var title in Titles)
-                    count += title.Items.Count;
-                
-                return count;
-            }
-        }
 
         protected override void LoadTitles(Invoice invoice)
         {
@@ -74,14 +65,6 @@ namespace HelppoLasku.ViewModels
             base.OnDispose();
         }
 
-        public void OnItemsChanged()
-        {
-            RaisePropertyChanged("Count");
-            RaisePropertyChanged("Taxless");
-            RaisePropertyChanged("Taxed");
-            RaisePropertyChanged("Total");
-        }
-
         public CommandViewModel NewTitle => new CommandViewModel("Lisää otsikko", OnNewTitle);
 
         void OnNewTitle()
@@ -95,41 +78,105 @@ namespace HelppoLasku.ViewModels
             Titles.Add(viewModel);
         }
 
-        public InvoiceCommandsViewModel StatusCommands { get; private set; }
-
         public override void OnSave()
         {
-            if (Model.IsNew || Model.InvoiceID > MainMenuViewModel.SelectedCompany.InvoiceID)
-                MainMenuViewModel.SelectedCompany.InvoiceID++;
+            if (statusChanged && !Views.MainWindow.ConfirmMessage("Lasku merkitään lähetetyksi eikä sitä voi enää tallentamisen jälkeen muokata.\n\n" +
+                "Haluatko varmasti tallentaa?", "Huomio", System.Windows.MessageBoxImage.Question))
+                return;
 
-            if (string.IsNullOrEmpty(Model.Reference) && Paid != null)
+            if (statusChanged)
             {
-                Reference = MainMenuViewModel.SelectedCompany.GetNewReference();
-                MainMenuViewModel.SelectedCompany.ReferenceNumber = Model.Reference.Remove(Model.Reference.Length - 1);
-            }
+                MainMenuViewModel.SelectedCompany.NewInvoice();
+                statusChanged = false;
+            }  
             base.OnSave();
         }
 
         public override bool CanSave()
         {
-            if (StatusCommands.Sending || StatusCommands.Paying)
+            if (Paying)
                 return false;
 
             return base.CanSave();
         }
 
-        public override string Error
+        public override bool? Paid
         {
-            get
+            get => base.Paid;
+            set
             {
-                foreach (EditInvoiceTitleViewModel title in Titles)
+                if (base.Paid != value)
                 {
-                    string error = title.Error;
-                    if (error != null)
-                        return error;
+                    if (base.Paid == null && value == false)
+                        statusChanged = true;
+                    base.Paid = value;
                 }
-                return base.Error;
             }
         }
+
+        #region SendCommand
+
+        public CommandViewModel Send { get; private set; }
+
+        bool statusChanged;
+
+        void OnSend()
+        {
+            Views.MainWindow.EditDialog(new SendInvoiceViewModel(this), 300, 250);
+        }
+
+        bool CanSend()
+            => Paid == null && Error == null;
+
+        #endregion
+
+        #region PayCommand
+
+        bool paying;
+
+        public bool Paying
+        {
+            get => paying;
+            set
+            {
+                if (paying != value)
+                {
+                    paying = value;
+                    RaisePropertyChanged("Paying");
+                }
+            }
+        }
+
+        public CommandViewModel Pay { get; private set; }
+
+        void OnPay()
+        {
+            PayDate = DateTime.Now;
+            Paying = true;
+            RaisePropertyChanged("PayDate");
+        }
+
+        bool CanPay()
+        {
+            return Paid != null && !Paying;
+        }
+
+        public CommandViewModel SavePay { get; private set; }
+
+        void OnSavePay()
+        {
+            Paid = true;
+            Paying = false;
+        }
+
+        public CommandViewModel CancelPay { get; private set; }
+
+        void OnCancelPay()
+        {
+            Paid = false;
+            Paying = false;
+        }
+
+        #endregion
     }
 }
