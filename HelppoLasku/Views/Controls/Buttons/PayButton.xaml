@@ -13,7 +13,7 @@
         ToolTip="{Binding ToolTip}"
         Visibility="{Binding Visibility}"
         
-        MaxHeight="18" MaxWidth="18" Padding="1"
+        MaxHeight="18" MaxWidth="18" Padding="1.2"
         
         Background="Transparent" BorderBrush="Transparent">
 

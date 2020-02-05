@@ -37,8 +37,8 @@ namespace HelppoLasku.ViewModels
             CustomerList.SelectionChanged += CustomerListSelectionChanged;
 
             Send = new CommandViewModel("Laskuta", OnSend, CanSend);
-            Pay = new CommandViewModel("Merkitse maksetuksi", OnPay, CanPay);
-            SavePay = new CommandViewModel("Aseta maksupäivä", OnSavePay);
+            Pay = new CommandViewModel("Merkitse maksupäivä", OnPay, CanPay);
+            SavePay = new CommandViewModel("Aseta päiväys", OnSavePay);
             CancelPay = new CommandViewModel("Peruuta", OnCancelPay);
         }
 

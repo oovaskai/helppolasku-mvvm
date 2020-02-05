@@ -27,6 +27,8 @@ namespace HelppoLasku.ViewModels
             }
         }
 
+        WorkspaceViewModel lastSelection;
+
         WorkspaceViewModel selectedWorkspace;
 
         public WorkspaceViewModel SelectedWorkspace
@@ -34,10 +36,9 @@ namespace HelppoLasku.ViewModels
             get { return Workspaces.Count > 0 ? selectedWorkspace : null; }
             set
             {
+                lastSelection = selectedWorkspace;
                 selectedWorkspace = value;
-                ICollectionView collection = CollectionViewSource.GetDefaultView(Workspaces);
-                if (collection != null)
-                    collection.MoveCurrentTo(value);
+                RaisePropertyChanged("SelectedWorkspace");
             }
         }
 
@@ -55,6 +56,13 @@ namespace HelppoLasku.ViewModels
             WorkspaceViewModel newspace = new WorkspaceViewModel(this, viewmodel);
             Workspaces.Add(newspace);
             SelectedWorkspace = newspace;
+        }
+
+        public void Remove(WorkspaceViewModel workspace)
+        {
+            if (workspace == SelectedWorkspace && lastSelection != workspace && Workspaces.Contains(lastSelection))
+                SelectedWorkspace = lastSelection;
+            Workspaces.Remove(workspace);
         }
 
         public WorkspaceViewModel ContainsViewModel(ViewModelBase viewmodel)

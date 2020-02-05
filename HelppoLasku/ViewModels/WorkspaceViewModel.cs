@@ -31,8 +31,7 @@ namespace HelppoLasku.ViewModels
         {
             OnClose?.Invoke(this, EventArgs.Empty);
             Dispose();
-            control.Workspaces.Remove(this);
-            
+            control.Remove(this);  
         });
 
         void OnContentPropertyChanged(object sender, PropertyChangedEventArgs e)

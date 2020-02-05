@@ -12,7 +12,7 @@
         <ResourceDictionary Source="WorkspaceResources.xaml" />
     </UserControl.Resources>
 
-    <TabControl Name="TabControl" ItemTemplate="{StaticResource WorkspaceTabItemTemplate}" ItemsSource="{Binding Workspaces}" IsSynchronizedWithCurrentItem="True">
+    <TabControl Name="TabControl" ItemTemplate="{StaticResource WorkspaceTabItemTemplate}" ItemsSource="{Binding Workspaces}" SelectedItem="{Binding SelectedWorkspace}" IsSynchronizedWithCurrentItem="True">
         <TabControl.ContentTemplate>
             
             <DataTemplate>

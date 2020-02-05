@@ -102,24 +102,24 @@
     <Compile Include="ViewModels\Base\FileManagerViewModel.cs" />
     <Compile Include="ViewModels\Base\FileViewModel.cs" />
     <Compile Include="ViewModels\Base\ImageManagerViewModel.cs" />
-    <Compile Include="ViewModels\Companies\CompanyMenuItemViewModel.cs" />
-    <Compile Include="ViewModels\Companies\CompanyMenuViewModel.cs" />
-    <Compile Include="ViewModels\Companies\EditCompanyViewModel.cs" />
-    <Compile Include="ViewModels\Customers\CustomerFilterViewModel.cs" />
-    <Compile Include="ViewModels\Customers\CustomerListViewModel.cs" />
-    <Compile Include="ViewModels\Customers\CustomerViewModel.cs" />
-    <Compile Include="ViewModels\Customers\EditCustomerViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\AllInvoicesViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\EditInvoiceItemViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\EditInvoiceTitleViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\EditInvoiceViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceFilterViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceItemViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceListViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\SendInvoiceViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceTitleViewModel.cs" />
-    <Compile Include="ViewModels\Invoices\InvoiceViewModel.cs" />
-    <Compile Include="ViewModels\Products\AllProductsViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyMenuItemViewModel.cs" />
+    <Compile Include="ViewModels\Company\CompanyMenuViewModel.cs" />
+    <Compile Include="ViewModels\Company\EditCompanyViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerFilterViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerListViewModel.cs" />
+    <Compile Include="ViewModels\Customer\CustomerViewModel.cs" />
+    <Compile Include="ViewModels\Customer\EditCustomerViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\AllInvoicesViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\EditInvoiceItemViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\EditInvoiceTitleViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\EditInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\InvoiceFilterViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\InvoiceItemViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\InvoiceListViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\SendInvoiceViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\InvoiceTitleViewModel.cs" />
+    <Compile Include="ViewModels\Invoice\InvoiceViewModel.cs" />
+    <Compile Include="ViewModels\Product\AllProductsViewModel.cs" />
     <Compile Include="ViewModels\Base\CommandViewModel.cs" />
     <Compile Include="ViewModels\Base\CustomCommand.cs" />
     <Compile Include="ViewModels\Base\DataViewModel.cs" />
@@ -128,12 +128,12 @@
     <Compile Include="ViewModels\Base\ViewModelBase.cs" />
     <Compile Include="ViewModels\MainMenuViewModel.cs" />
     <Compile Include="ViewModels\MainWindowViewModel.cs" />
-    <Compile Include="ViewModels\Products\EditProductViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductFilterViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductGroupListViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductGroupViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductListViewModel.cs" />
-    <Compile Include="ViewModels\Products\ProductViewModel.cs" />
+    <Compile Include="ViewModels\Product\EditProductViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductFilterViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductGroupListViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductGroupViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductListViewModel.cs" />
+    <Compile Include="ViewModels\Product\ProductViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceControlViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
     <Compile Include="Views\Controls\Buttons\AddButton.xaml.cs">
@@ -217,61 +217,61 @@
     <Compile Include="Views\Controls\Buttons\SymbolButton.xaml.cs">
       <DependentUpon>SymbolButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomerFilterView.xaml.cs">
+    <Compile Include="Views\Customer\CustomerFilterView.xaml.cs">
       <DependentUpon>CustomerFilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\CustomerListView.xaml.cs">
+    <Compile Include="Views\Customer\CustomerListView.xaml.cs">
       <DependentUpon>CustomerListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditCompanyView.xaml.cs">
+    <Compile Include="Views\Company\EditCompanyView.xaml.cs">
       <DependentUpon>EditCompanyView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditCustomerView.xaml.cs">
+    <Compile Include="Views\Customer\EditCustomerView.xaml.cs">
       <DependentUpon>EditCustomerView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditInvoiceItemView.xaml.cs">
+    <Compile Include="Views\Invoice\EditInvoiceItemView.xaml.cs">
       <DependentUpon>EditInvoiceItemView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditInvoiceTitleView.xaml.cs">
+    <Compile Include="Views\Invoice\EditInvoiceTitleView.xaml.cs">
       <DependentUpon>EditInvoiceTitleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditInvoiceView.xaml.cs">
+    <Compile Include="Views\Invoice\EditInvoiceView.xaml.cs">
       <DependentUpon>EditInvoiceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\EditProductView.xaml.cs">
+    <Compile Include="Views\Product\EditProductView.xaml.cs">
       <DependentUpon>EditProductView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceCommandsView.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceCommandsView.xaml.cs">
       <DependentUpon>InvoiceCommandsView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceFilterView.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceFilterView.xaml.cs">
       <DependentUpon>InvoiceFilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceListView.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceListView.xaml.cs">
       <DependentUpon>InvoiceListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceStatusControl.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceStatusControl.xaml.cs">
       <DependentUpon>InvoiceStatusControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\SendInvoiceView.xaml.cs">
+    <Compile Include="Views\Invoice\SendInvoiceView.xaml.cs">
       <DependentUpon>SendInvoiceView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceTitleView.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceTitleView.xaml.cs">
       <DependentUpon>InvoiceTitleView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\InvoiceView.xaml.cs">
+    <Compile Include="Views\Invoice\InvoiceView.xaml.cs">
       <DependentUpon>InvoiceView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MainMenuView.xaml.cs">
       <DependentUpon>MainMenuView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductFilterView.xaml.cs">
+    <Compile Include="Views\Product\ProductFilterView.xaml.cs">
       <DependentUpon>ProductFilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductGroupListView.xaml.cs">
+    <Compile Include="Views\Product\ProductGroupListView.xaml.cs">
       <DependentUpon>ProductGroupListView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\ProductListView.xaml.cs">
+    <Compile Include="Views\Product\ProductListView.xaml.cs">
       <DependentUpon>ProductListView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SplittedView.xaml.cs">
@@ -388,67 +388,67 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerFilterView.xaml">
+    <Page Include="Views\Customer\CustomerFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\CustomerListView.xaml">
+    <Page Include="Views\Customer\CustomerListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditCompanyView.xaml">
+    <Page Include="Views\Company\EditCompanyView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditCustomerView.xaml">
+    <Page Include="Views\Customer\EditCustomerView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditInvoiceItemView.xaml">
+    <Page Include="Views\Invoice\EditInvoiceItemView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditInvoiceTitleView.xaml">
+    <Page Include="Views\Invoice\EditInvoiceTitleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditInvoiceView.xaml">
+    <Page Include="Views\Invoice\EditInvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\EditProductView.xaml">
+    <Page Include="Views\Product\EditProductView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceCommandsView.xaml">
+    <Page Include="Views\Invoice\InvoiceCommandsView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceFilterView.xaml">
+    <Page Include="Views\Invoice\InvoiceFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceListView.xaml">
+    <Page Include="Views\Invoice\InvoiceListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceResources.xaml">
+    <Page Include="Views\Invoice\InvoiceResources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceStatusControl.xaml">
+    <Page Include="Views\Invoice\InvoiceStatusControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\SendInvoiceView.xaml">
+    <Page Include="Views\Invoice\SendInvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceTitleView.xaml">
+    <Page Include="Views\Invoice\InvoiceTitleView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\InvoiceView.xaml">
+    <Page Include="Views\Invoice\InvoiceView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -468,15 +468,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductFilterView.xaml">
+    <Page Include="Views\Product\ProductFilterView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductGroupListView.xaml">
+    <Page Include="Views\Product\ProductGroupListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\ProductListView.xaml">
+    <Page Include="Views\Product\ProductListView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

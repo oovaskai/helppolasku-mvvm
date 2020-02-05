@@ -96,6 +96,15 @@ namespace HelppoLasku.ViewModels
             MainMenuViewModel.EditInvoice(copy);
         }
 
+        public override void OnDelete()
+        {
+            if (Views.MainWindow.ConfirmMessage($"Haluatko varmasti poistaa laskun asiakkaalle {SelectedItem.Customer.Name} ?", "Varoitus", System.Windows.MessageBoxImage.Question))
+            {
+                SelectedItem.Model.Delete();
+                SelectedItem = null;
+            }
+        }
+
         public override bool CanDelete()
         {
             if (!base.CanDelete())
