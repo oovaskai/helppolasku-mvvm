@@ -181,11 +181,8 @@
     <Compile Include="Views\Controls\InputTextBox.xaml.cs">
       <DependentUpon>InputTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\Buttons\ListButtonPanel1.xaml.cs">
-      <DependentUpon>ListButtonPanel1.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\Controls\Buttons\ListButtonPanel2.xaml.cs">
-      <DependentUpon>ListButtonPanel2.xaml</DependentUpon>
+    <Compile Include="Views\Controls\Buttons\ListButtonPanel.xaml.cs">
+      <DependentUpon>ListButtonPanel.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\Buttons\OkButton.xaml.cs">
       <DependentUpon>OkButton.xaml</DependentUpon>
@@ -343,11 +340,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\Buttons\ListButtonPanel1.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\Controls\Buttons\ListButtonPanel2.xaml">
+    <Page Include="Views\Controls\Buttons\ListButtonPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

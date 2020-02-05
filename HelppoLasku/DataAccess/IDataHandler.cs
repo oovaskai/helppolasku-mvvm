@@ -11,9 +11,9 @@ namespace HelppoLasku.DataAccess
     {
         List<DataModel> GetAll();
 
-        List<DataModel> GetIf(string where, string isValue);
+        List<DataModel> Find(string where, string isValue);
 
-        DataModel GetByID(string id);
+        DataModel FindByID(string id);
 
         DataModel Create(DataModel model);
 

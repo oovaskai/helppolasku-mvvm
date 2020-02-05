@@ -13,7 +13,7 @@
         <DataTemplate x:Key="GroupListHeaderTemplate">
 
             <HeaderedContentControl Header="{Binding DisplayName}" HorizontalContentAlignment="Right" HorizontalAlignment="Stretch" Margin="2,0,2,0" DockPanel.Dock="Top" Focusable="False">
-                <controls:ListButtonPanel2 Grid.Column="1" DataContext="{Binding Commands}" HorizontalAlignment="Right" Height="22"/>
+                <controls:ListButtonPanel Grid.Column="1" DataContext="{Binding Commands}" HorizontalAlignment="Right" Height="22"/>
             </HeaderedContentControl>
                 
         </DataTemplate>

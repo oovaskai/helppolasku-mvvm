@@ -28,6 +28,10 @@ namespace HelppoLasku.PDF
                 throw new NullReferenceException("Template");
 
             var document = new Document();
+            document.Info.Title = Title;
+            document.Info.Author = Author;
+            document.Info.Subject = Subject;
+
             Theme?.Define(document);
             document.Add(Template.Create());
 

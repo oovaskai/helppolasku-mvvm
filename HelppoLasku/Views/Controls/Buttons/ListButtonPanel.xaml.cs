@@ -15,12 +15,9 @@ using System.Windows.Shapes;
 
 namespace HelppoLasku.Views.Controls
 {
-    /// <summary>
-    /// Interaction logic for ListButtonPanel1.xaml
-    /// </summary>
-    public partial class ListButtonPanel1 : UserControl
+    public partial class ListButtonPanel : UserControl
     {
-        public ListButtonPanel1()
+        public ListButtonPanel()
         {
             InitializeComponent();
         }

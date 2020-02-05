@@ -17,6 +17,7 @@ namespace HelppoLasku.ViewModels
             Filter = new CustomerFilterViewModel();
 
             Invoice = new CommandViewModel("Laskuta", "Luo uusi lasku tälle asiakkaalle.", OnInvoice, CanEdit);
+            Commands.Copy.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         public override DataViewModel NewItem(DataModel model)

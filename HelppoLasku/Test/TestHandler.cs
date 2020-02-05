@@ -33,12 +33,12 @@ namespace HelppoLasku.Test
             return source;
         }
 
-        public DataModel GetByID(string id)
+        public DataModel FindByID(string id)
         {
             return source.Find((model) => model.ID == id);
         }
 
-        public List<DataModel> GetIf(string where, string isValue)
+        public List<DataModel> Find(string where, string isValue)
         {
             throw new NotImplementedException();
         }

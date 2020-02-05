@@ -16,6 +16,7 @@ namespace HelppoLasku.ViewModels
         public ProductGroupListViewModel(ObservableCollection<DataModel> source) : base(source)
         {
             DisplayName = "Tuoteryhmät";
+            Commands.Copy.Visibility = System.Windows.Visibility.Collapsed;
         }
 
         CollectionView View; 

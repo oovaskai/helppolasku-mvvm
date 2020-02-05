@@ -55,7 +55,7 @@
             <TextBox Text="{Binding Location, UpdateSourceTrigger=PropertyChanged}" />
         </HeaderedContentControl>
 
-        <controls:ListButtonPanel2 DataContext="{Binding List.Commands}" VerticalAlignment="Bottom" Margin="2,0,2,4"  Grid.Column="6" />
+        <controls:ListButtonPanel DataContext="{Binding List.Commands}" VerticalAlignment="Bottom" Margin="2,0,2,4"  Grid.Column="6" />
 
     </Grid>
 </UserControl>

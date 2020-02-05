@@ -12,7 +12,7 @@
         Visibility="{Binding Visibility}"
         Focusable="True"
         
-        MaxHeight="18" MaxWidth="18" Padding="2"
+        MaxHeight="18" MaxWidth="18" Padding="2.2"
         
         Background="Transparent" BorderBrush="Transparent" >
 
