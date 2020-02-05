@@ -35,11 +35,20 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="PdfSharp, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.dll</HintPath>
+    <Reference Include="MigraDoc.DocumentObjectModel-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.DocumentObjectModel-wpf.dll</HintPath>
     </Reference>
-    <Reference Include="PdfSharp.Charting, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
-      <HintPath>..\packages\PDFsharp.1.50.5147\lib\net20\PdfSharp.Charting.dll</HintPath>
+    <Reference Include="MigraDoc.Rendering-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.Rendering-wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="MigraDoc.RtfRendering-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\MigraDoc.RtfRendering-wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\PdfSharp-wpf.dll</HintPath>
+    </Reference>
+    <Reference Include="PdfSharp.Charting-wpf, Version=1.50.5147.0, Culture=neutral, PublicKeyToken=f94615aa0424f9eb, processorArchitecture=MSIL">
+      <HintPath>..\packages\PDFsharp-MigraDoc-wpf.1.50.5147\lib\net30\PdfSharp.Charting-wpf.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -65,9 +74,11 @@
     </ApplicationDefinition>
     <Compile Include="DataAccess\DataRepository.cs" />
     <Compile Include="PDF\PdfCreator.cs" />
-    <Compile Include="PDF\PreviewPdf.xaml.cs">
-      <DependentUpon>PreviewPdf.xaml</DependentUpon>
-    </Compile>
+    <Compile Include="PDF\Template.cs" />
+    <Compile Include="PDF\Templates\DefaultInvoiceTemplate.cs" />
+    <Compile Include="PDF\Templates\InvoiceTemplate.cs" />
+    <Compile Include="PDF\Theme.cs" />
+    <Compile Include="PDF\Themes\DefaultInvoiceTheme.cs" />
     <Compile Include="Validation\DataValidator.cs" />
     <Compile Include="DataAccess\IDataHandler.cs" />
     <Compile Include="DataAccess\Resources.cs" />
@@ -125,34 +136,37 @@
     <Compile Include="ViewModels\Products\ProductViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceControlViewModel.cs" />
     <Compile Include="ViewModels\WorkspaceViewModel.cs" />
-    <Compile Include="Views\Controls\AddButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\AddButton.xaml.cs">
       <DependentUpon>AddButton.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Controls\Buttons\CancelButton.xaml.cs">
+      <DependentUpon>CancelButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\CheckBoxInputControl.xaml.cs">
       <DependentUpon>CheckBoxInputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\ClearButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\ClearButton.xaml.cs">
       <DependentUpon>ClearButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\CopyButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\CopyButton.xaml.cs">
       <DependentUpon>CopyButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\DeleteButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\DeleteButton.xaml.cs">
       <DependentUpon>DeleteButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\Dialog.xaml.cs">
       <DependentUpon>Dialog.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\EditButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\EditButton.xaml.cs">
       <DependentUpon>EditButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\FileButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\FileButton.xaml.cs">
       <DependentUpon>FileButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\FileControl.xaml.cs">
       <DependentUpon>FileControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\FolderButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\FolderButton.xaml.cs">
       <DependentUpon>FolderButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\HeaderedSplittedView.xaml.cs">
@@ -167,25 +181,25 @@
     <Compile Include="Views\Controls\InputTextBox.xaml.cs">
       <DependentUpon>InputTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\ListButtonPanel1.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\ListButtonPanel1.xaml.cs">
       <DependentUpon>ListButtonPanel1.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\ListButtonPanel2.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\ListButtonPanel2.xaml.cs">
       <DependentUpon>ListButtonPanel2.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\OkButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\OkButton.xaml.cs">
       <DependentUpon>OkButton.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\OkCancelButtonPanel.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\OkCancelButtonPanel.xaml.cs">
       <DependentUpon>OkCancelButtonPanel.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\PayButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\PayButton.xaml.cs">
       <DependentUpon>PayButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SearchTextBox.xaml.cs">
       <DependentUpon>SearchTextBox.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\SendButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\SendButton.xaml.cs">
       <DependentUpon>SendButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Controls\SortableListColumn.xaml.cs">
@@ -203,7 +217,7 @@
     <Compile Include="Views\Controls\TextUnitInputControl.xaml.cs">
       <DependentUpon>TextUnitInputControl.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\Controls\SymbolButton.xaml.cs">
+    <Compile Include="Views\Controls\Buttons\SymbolButton.xaml.cs">
       <DependentUpon>SymbolButton.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\CustomerFilterView.xaml.cs">
@@ -269,11 +283,11 @@
     <Compile Include="Views\WorkspaceControlView.xaml.cs">
       <DependentUpon>WorkspaceControlView.xaml</DependentUpon>
     </Compile>
-    <Page Include="PDF\PreviewPdf.xaml">
+    <Page Include="Views\Controls\Buttons\AddButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\AddButton.xaml">
+    <Page Include="Views\Controls\Buttons\CancelButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,15 +295,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\ClearButton.xaml">
+    <Page Include="Views\Controls\Buttons\ClearButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\CopyButton.xaml">
+    <Page Include="Views\Controls\Buttons\CopyButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\DeleteButton.xaml">
+    <Page Include="Views\Controls\Buttons\DeleteButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -297,11 +311,11 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\EditButton.xaml">
+    <Page Include="Views\Controls\Buttons\EditButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\FileButton.xaml">
+    <Page Include="Views\Controls\Buttons\FileButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -309,7 +323,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\FolderButton.xaml">
+    <Page Include="Views\Controls\Buttons\FolderButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -329,23 +343,23 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\ListButtonPanel1.xaml">
+    <Page Include="Views\Controls\Buttons\ListButtonPanel1.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\ListButtonPanel2.xaml">
+    <Page Include="Views\Controls\Buttons\ListButtonPanel2.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\OkButton.xaml">
+    <Page Include="Views\Controls\Buttons\OkButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\OkCancelButtonPanel.xaml">
+    <Page Include="Views\Controls\Buttons\OkCancelButtonPanel.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\PayButton.xaml">
+    <Page Include="Views\Controls\Buttons\PayButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -353,7 +367,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\SendButton.xaml">
+    <Page Include="Views\Controls\Buttons\SendButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -377,7 +391,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\Controls\SymbolButton.xaml">
+    <Page Include="Views\Controls\Buttons\SymbolButton.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

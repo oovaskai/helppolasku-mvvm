@@ -38,6 +38,8 @@ namespace HelppoLasku.Models
         
         public double Tax { get; set; }
 
+        public string InvoiceFolder { get; set; }
+
         internal override string[] CopyProperties
         {
             get
@@ -56,6 +58,7 @@ namespace HelppoLasku.Models
                     "ReferenceBase",
                     "InvoiceID",
                     "Tax",
+                    "InvoiceFolder"
                 }).ToArray();
 
                 return props;

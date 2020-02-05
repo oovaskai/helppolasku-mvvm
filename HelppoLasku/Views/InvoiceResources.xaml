@@ -148,5 +148,6 @@
     <Image Source="/Images/copy-blue.png" x:Key="copyImage" Height="12" />
     <Image Source="/Images/pencil-edit-button.png" x:Key="editImage" Height="13" />
     <Image Source="/Images/clear.png" x:Key="deleteImage" Height="10" />
+    <Image Source="/Images/file-white.png" x:Key="fileImage" Height="11.7" />
 
 </ResourceDictionary>

@@ -131,7 +131,7 @@ namespace HelppoLasku.ViewModels
 
         public virtual void OnGetFile()
         {
-            string[] files = Views.MainWindow.OpenFileDialog(Filter, Environment.GetFolderPath(Environment.SpecialFolder.Desktop), true);
+            string[] files = Views.MainWindow.OpenFileDialog(Filter, null, true);
 
             if (files != null)
                 foreach (string file in files)
@@ -155,7 +155,6 @@ namespace HelppoLasku.ViewModels
 
                         filetypes += type.Remove(0, 1);
                     }
-
 
                     Views.MainWindow.Message("Tiedostotyyppi " + GetFileExtension(filepath).Remove(0, 1) + " ei ole kelvollinen.\n\n" +
                         "Tuetut tiedostotyypit: " + filetypes, "Virhe", System.Windows.MessageBoxImage.Error);

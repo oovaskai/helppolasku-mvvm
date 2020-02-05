@@ -93,6 +93,7 @@
             <ListView.ContextMenu>
                 <ContextMenu>
                     <MenuItem DataContext="{Binding Commands.New}" Icon="{StaticResource newImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
+                    <MenuItem DataContext="{Binding CreateFile}" Icon="{StaticResource fileImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
                     <MenuItem DataContext="{Binding Commands.Edit}" Icon="{StaticResource editImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
                     <MenuItem DataContext="{Binding Commands.Copy}" Icon="{StaticResource copyImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />
                     <MenuItem DataContext="{Binding Commands.Delete}" Icon="{StaticResource deleteImage}" Style="{StaticResource InvoiceListMenuItemStyle}" />

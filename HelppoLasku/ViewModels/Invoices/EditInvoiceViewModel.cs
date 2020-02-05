@@ -18,7 +18,14 @@ namespace HelppoLasku.ViewModels
             EditEnabled = true;
             Validator = new Validation.InvoiceValidator(this);
 
-            DisplayName = Model.IsNew ? "Uusi lasku" : "Lasku " + (InvoiceID == null ? Status : InvoiceID.ToString()) + (Customer == null ? null : " - " + Customer.Name);
+            if (Model.IsNew)
+            {
+                DisplayName = "Uusi lasku";
+                if (Model.Titles.Count < 1)
+                    NewTitle.Execute();
+            }
+            else
+                DisplayName = "Lasku " + (InvoiceID == null ? Status : InvoiceID.ToString()) + (Customer == null ? null : " - " + Customer.Name);
 
             if (Paid != null)
                 IsEnabled = false;
@@ -75,6 +82,7 @@ namespace HelppoLasku.ViewModels
 
             EditInvoiceTitleViewModel viewModel = new EditInvoiceTitleViewModel(title);
             viewModel.Invoice = this;
+            viewModel.NewItem.Execute();
             Titles.Add(viewModel);
         }
 

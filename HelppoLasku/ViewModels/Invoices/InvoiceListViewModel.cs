@@ -13,6 +13,7 @@ namespace HelppoLasku.ViewModels
     {
         public InvoiceListViewModel(ObservableCollection<DataModel> source) : base(source)
         {
+            CreateFile = new CommandViewModel("Vie PDF:ksi", "Tallenna tiedosto PDF-muodossa.", OnCreateFile, CanCreateFile);
         }
 
         public override DataViewModel NewItem(DataModel model)
@@ -101,6 +102,39 @@ namespace HelppoLasku.ViewModels
                 return false;
 
             return SelectedItem.Paid == null;
+        }
+
+        public CommandViewModel CreateFile { get; private set; }
+
+        void OnCreateFile()
+        {
+            Company company = MainMenuViewModel.SelectedCompany;
+            Invoice invoice = SelectedItem.Model;
+
+            string file = Views.MainWindow.SaveFileDialog(
+                "Lasku " + invoice.InvoiceID.ToString() + " " + invoice.Customer.Name, 
+                company.InvoiceFolder,
+                new Views.MainWindow.FileDialogFilter("PDF-tiedosto.pdf").Filter);
+
+            if (file == null)
+                return;
+
+            company.InvoiceFolder = file.Remove(file.LastIndexOf(@"\"));
+
+            PDF.PdfCreator pdf = new PDF.PdfCreator();
+
+            pdf.Title = "Lasku " + invoice.InvoiceID.ToString();
+            pdf.Author = company.Name;
+
+            pdf.Theme = new PDF.Themes.DefaultInvoiceTheme();
+            pdf.Template = new PDF.Templates.DefaultInvoiceTemplate(company, invoice);
+
+            pdf.CreateDocument(file, true);
+        }
+
+        bool CanCreateFile()
+        {
+            return SelectedItem != null ? SelectedItem.Paid != null : false;
         }
     }
 }

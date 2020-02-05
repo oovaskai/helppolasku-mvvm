@@ -1,4 +1,4 @@
-﻿<Button x:Class="HelppoLasku.Views.Controls.OkButton"
+﻿<Button x:Class="HelppoLasku.Views.Controls.CancelButton"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
@@ -7,12 +7,13 @@
              mc:Ignorable="d" 
              d:DesignHeight="18" d:DesignWidth="18"
         
-        DataContext="{Binding Save}"
+        DataContext="{Binding Cancel}"
         Command="{Binding Command}"
         ToolTip="{Binding ToolTip}"
         Visibility="{Binding Visibility}"
+        Focusable="True"
         
-        MaxHeight="18" MaxWidth="18" Padding="1.8"
+        MaxHeight="18" MaxWidth="18" Padding="3"
         
         Background="Transparent" BorderBrush="Transparent" >
 
@@ -26,6 +27,6 @@
         </Style>
     </Button.Style>
 
-    <Image Source="/Images/check-mark.png"/>
-    
+    <Image Source="/Images/clear.png"/>
+
 </Button>

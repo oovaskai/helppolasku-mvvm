@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.ComponentModel;
 using HelppoLasku.DataAccess;
+using MigraDoc.DocumentObjectModel;
 
 namespace HelppoLasku.ViewModels
 {
@@ -20,7 +21,7 @@ namespace HelppoLasku.ViewModels
             DisplayName = "HelppoLasku";
 
             WorkspaceControl = new WorkspaceControlViewModel();
-            MainMenu = new MainMenuViewModel();   
+            MainMenu = new MainMenuViewModel();
         }
 
         public MainMenuViewModel MainMenu { get; private set; }

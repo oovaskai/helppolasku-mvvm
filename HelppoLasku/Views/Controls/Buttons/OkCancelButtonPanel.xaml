@@ -13,8 +13,9 @@
             IsDefault="{Binding Path=IsOkDefault, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}" 
             Focusable="{Binding Path=Focusable, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}" />
 
-        <local:DeleteButton DataContext="{Binding Cancel}" Command="{Binding Command}" ToolTip="{Binding ToolTip}" Margin="1,0,2,0"
-                            Focusable="{Binding Path=Focusable, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}"/>
+        <local:CancelButton Margin="1,0,2,0"
+            Focusable="{Binding Path=Focusable, RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type local:OkCancelButtonPanel}}}"/>
+        
     </StackPanel>
     
 </UserControl>

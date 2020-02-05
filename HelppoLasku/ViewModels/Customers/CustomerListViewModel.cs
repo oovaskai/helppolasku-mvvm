@@ -32,7 +32,8 @@ namespace HelppoLasku.ViewModels
 
         void OnInvoice()
         {
-            MainMenuViewModel.EditInvoice(new Invoice { Customer = SelectedItem.Model });
+            Invoice invoice = new Invoice { Customer = SelectedItem.Model };
+            MainMenuViewModel.EditInvoice(invoice);
         }
 
         public override void OnNew()

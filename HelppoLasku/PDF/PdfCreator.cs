@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using PdfSharp.Pdf;
-using PdfSharp.Drawing;
+using MigraDoc.DocumentObjectModel;
+using MigraDoc.Rendering;
 using System.Diagnostics;
 
 namespace HelppoLasku.PDF
@@ -13,33 +13,42 @@ namespace HelppoLasku.PDF
     {
         public PdfCreator()
         {
-
         }
 
-        public void Create(string hello)
+        public string Title { get; set; }
+        public string Author { get; set; }
+        public string Subject { get; set; }
+
+        public Theme Theme { get; set; }
+        public Template Template { get; set; }
+
+        public void CreateDocument(string filename, bool openFile)
         {
-            PdfDocument document = new PdfDocument();
+            if (Template == null)
+                throw new NullReferenceException("Template");
 
-            document.Info.Title = "Invoice";
-            document.Info.Author = "HelppoLasku";
+            var document = new Document();
+            Theme?.Define(document);
+            document.Add(Template.Create());
 
-            PdfPage page = document.AddPage();
-
-            XGraphics gfx = XGraphics.FromPdfPage(page);
-
-            XFont font = new XFont("Verdana", 20, XFontStyle.Bold);
-
-            for (int i = 0; i < 50; i++)
+            try
             {
-                XRect rect = new XRect(0, i * 20, page.Width, page.Height);
-                gfx.DrawString(i + " " + hello, font, XBrushes.Black, rect, XStringFormats.TopLeft);
+                var renderer = new PdfDocumentRenderer(true);
+                renderer.Document = document;
+                renderer.RenderDocument();
+
+                if (filename.LastIndexOf(".pdf") != filename.Length - 4)
+                    filename += ".pdf";
+
+                renderer.PdfDocument.Save(filename);
+
+                if (openFile)
+                    Process.Start(filename);
             }
-
-            string filename = "Hello.pdf";
-
-            document.Save(filename);
-
-            Process.Start(filename);
+            catch (Exception ex)
+            {
+                Views.MainWindow.Message(ex.Message, "Virhe", System.Windows.MessageBoxImage.Error);
+            }      
         }
     }
 }

@@ -54,7 +54,8 @@
         <DockPanel LastChildFill="True" Grid.Row="1" IsEnabled="{Binding IsEnabled}">
 
             <controls:InputPanel Header="Yleiset" DockPanel.Dock="Top">
-                <controls:TextInputControl Title="Y-tunnus:" Text="{Binding CompanyID, ValidatesOnDataErrors=True}" ToolTip="Y-Tunnus"/>
+                <controls:TextInputControl Title="Yhteyshenkilö:" Text="{Binding ContactPerson}" />
+                <controls:TextInputControl Title="Y-tunnus:" Text="{Binding CompanyID, ValidatesOnDataErrors=True}" />
                 <controls:TextInputControl Title="Puhelin:" Text="{Binding Phone, ValidatesOnDataErrors=True}"/>
                 <controls:TextInputControl Title="Sähköposti:" Text="{Binding Email, ValidatesOnDataErrors=True}"/>
                 <controls:TextInputControl Title="Kotisivu:" Text="{Binding WebPage}"/>
@@ -124,16 +125,18 @@
                     </Grid.ColumnDefinitions>
 
                     <Label Content="Oletus ALV:" />
-                    
+
                     <DockPanel Grid.Column="1" LastChildFill="True">
-                        
-                        <Label Content="Sisältyy hintaan:" DockPanel.Dock="Right"/>
-                        <Label Content="%" DockPanel.Dock="Right"/>
+
+                        <Label Content="Sisältyy hintaan:" DockPanel.Dock="Left"/>
+
+                        <CheckBox IsChecked="{Binding IsTaxed}" Margin="2,7,5,0"/>
+
                         <ComboBox ItemsSource="{Binding TaxRates}" SelectedItem="{Binding Tax}" HorizontalAlignment="Stretch" HorizontalContentAlignment="Right" Margin="2"/>
-                        
+
                     </DockPanel>
 
-                    <CheckBox IsChecked="{Binding IsTaxed}" Grid.Column="2" Margin="2,7,0,0"/>
+                    <Label Content="%" Grid.Column="3" />
                 </Grid>
 
             </controls:InputPanel>

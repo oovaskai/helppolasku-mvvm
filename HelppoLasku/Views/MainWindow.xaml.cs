@@ -14,6 +14,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.ComponentModel;
 using Microsoft.Win32;
+using System.IO;
 using HelppoLasku.ViewModels;
 
 namespace HelppoLasku.Views
@@ -73,13 +74,13 @@ namespace HelppoLasku.Views
 
         #endregion
 
-        #region OpenFileDialog
+        #region File Dialogs
 
         public static string[] OpenFileDialog(string filter, string initDir, bool multiSelect = false)
         {
             OpenFileDialog dialog = new OpenFileDialog();
             dialog.Filter = filter;
-            dialog.InitialDirectory = initDir;
+            dialog.InitialDirectory = Directory.Exists(initDir) ? initDir : Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
             dialog.Multiselect = multiSelect;
 
             if (dialog.ShowDialog() == true)
@@ -87,9 +88,25 @@ namespace HelppoLasku.Views
             return null;
         }
 
-        public class OpenFileDialogFilter
+        public static string SaveFileDialog(string filename, string initDir, string filter)
         {
-            public OpenFileDialogFilter(string filter)
+            SaveFileDialog dialog = new SaveFileDialog();
+            dialog.Filter = filter;
+            dialog.InitialDirectory = Directory.Exists(initDir) ? initDir : Environment.GetFolderPath(Environment.SpecialFolder.Desktop);
+
+            foreach (char c in System.IO.Path.GetInvalidFileNameChars())
+                filename = filename.Replace(c, '_');
+            filename = filename.Replace(' ', '_');
+
+            dialog.FileName = filename;
+            if (dialog.ShowDialog() == true)
+                return dialog.FileName;
+            return null;
+        }
+
+        public class FileDialogFilter
+        {
+            public FileDialogFilter(string filter)
             {
                 Title = filter.Split('.')[0];
                 Extension = filter.Split('.')[1];
@@ -100,8 +117,6 @@ namespace HelppoLasku.Views
             public string Extension { get; private set; }
 
             public string Filter => Title + " (*." + Extension + ")|*." + Extension;
-
-
         }
 
         #endregion

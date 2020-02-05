@@ -17,10 +17,11 @@ namespace HelppoLasku.ViewModels
             {
                 Customer = new CustomerViewModel(invoice.Customer);
                 Customer.Model.ModelChanged += OnModelChanged;
-            }
-                
+            }   
 
             LoadTitles(invoice);
+
+            
         }
 
         public new Invoice Model
